@@ -49,7 +49,7 @@ Como usuário, eu gostaria de recuperar meu acesso em caso de esquecimento de se
 * A tela de alteração de senha apenas aparece em caso de resposta correta na tela dois de recuperação.  
 * A tela de alterar senha deve conter os campos de nova senha e confirmar nova senha
 
-### **US04 \- Busca de Profissional**
+### **US04 \- Busca por Profissional**
 
 #### **História**
 
@@ -67,14 +67,45 @@ Como cliente, eu gostaria de buscar e encontrar um bom técnico de informática 
 
 Como prestador de serviços, eu gostaria de me cadastrar em categorias específicas para disponibilizar meus serviços online e receber ofertas de clientes.
 
+#### **Critérios de Aceitação**
+
+* O sistema deve fornecer sistema de categorização de serviços.
+
 ### **US06 \- Sistema de Avaliação**
 
 #### **História**
 
 Como cliente, eu gostaria de saber se o profissional que estou contratando é bom em seu trabalho por meio de avaliações e comentários.
 
+#### **Critérios de Aceitação**
+
+* O sistema deve permitir que clientes façam avaliações em estrelas após terem recebido um serviço.  
+* Cliente e Profissional devem confirmar que o serviço foi finalizado antes da avaliação ficar disponível para ser realizada.  
+* O sistema deve permitir que clientes façam avaliações em texto de serviços.
+
+
 ### **US07 \- Troca de Mensagens**
 
 #### **História**
 
 Como cliente, eu gostaria de conversar com o prestador antes de contratar para tirar dúvidas.
+
+#### **Critérios de Aceitação**
+
+* O sistema deve permitir que apenas clientes iniciem trocas de mensagens pela primeira vez.  
+* O sistema deve permitir que clientes enviem e recebam mensagens.  
+* O sistema deve permitir que prestadores de serviços enviem e recebam mensagens.
+
+
+## **Backlog**
+
+| ID | Nome | Prioridade | Estimativa (dias) |
+| :---- | :---- | :---- | :---- |
+| US01 | Login de Usuário | Alta |  |
+| US02 | Perfil Profissional | Alta |  |
+| US03 | Recuperação de Senha | Média |  |
+| US04 | Busca por Profissional | Alta |  |
+| US05 | Cadastro em categorias | Alta |  |
+| US06 | Sistema de Avaliação | Média |  |
+| US07 | Troca de Mensagens | Baixa |  |
+
