@@ -6,34 +6,94 @@ Este documento apresenta os requisitos funcionais e não funcionais do sistema M
 
 ## **Histórias de Usuário**
 
-### **US01 \- Login de Usuário**
+### **US01 \- Cadastro de Cliente**
 
 #### **História**
 
-Como um novo usuário, eu gostaria de me cadastrar e fazer login no site para que eu possa gerenciar meus dados pessoais e serviços.
+Como cliente, eu gostaria de me cadastrar para ter um perfil no site.
 
 #### **Critérios de Aceitação**
 
-* O sistema deve apresentar as opções de login, cadastro de cliente e cadastro de prestador na página inicial.  
-* A página de cadastro de cliente deve conter um formulário requisitando nome completo, e-mail, senha e confirmação de senha.  
-* A página de cadastro de prestador deve conter um formulário requisitando nome completo, CPF, celular, e-mail, senha, confirmação de senha.  
-* Apenas uma conta é permitida por e-mail.  
-* A página de login deve conter um formulário requisitando e-mail e senha.  
-* O sistema deve permitir que o usuário acesse seu perfil para observação, alteração ou adição de dados pessoais.  
-* Se o usuário inserir informações incorretas de login ele receberá mensagem de erro.
+* Apenas uma conta por E-mail é permitida.  
+* Nome completo e E-mail são obrigatórios.  
+* O sistema deve pedir preenchimento de senha duas vezes no ato de cadastro.  
+* Todos os campos devem ser validados conforme seu tipo.
 
-### **US02 \- Perfil Profissional**
+### **US02 \- Cadastro de Prestador de Serviços**
 
 #### **História**
 
-Como prestador , eu gostaria ter um perfil com descrição e portfólio.
+Como prestador de serviços, eu gostaria de me cadastrar para ter um perfil no site.
 
 #### **Critérios de Aceitação**
 
-* Com o usuário prestador logado o sistema deve permitir que sejam adicionadas, editadas e observadas informações de descrição e portfólio.
+* Apenas uma conta por E-mail é permitida.  
+* Nome completo, E-mail, e celular são obrigatórios.  
+* O sistema permite cadastro por CPF ou CNPJ.  
+* O sistema deve pedir preenchimento de senha duas vezes no ato de cadastro.  
+* A seleção de pelo menos uma categoria é obrigatória.  
+* Todos os campos devem ser validados conforme seu tipo.
+
+### **US03 \- Autenticação de Usuário**
+
+#### **História**
+
+Como usuário, gostaria de fazer login no site para ter acesso às suas funcionalidades.
+
+#### **Critérios de Aceitação**
+
+* Mensagem de erro será exibida em caso de informações incorretas de login  
+* O usuário será redirecionado após autenticação bem sucedida.
+
+### **US04 \- Perfil de Usuário**
+
+#### **História**
+
+Como usuário, eu gostaria de visualizar meus dados pessoais.
+
+#### **Critérios de Aceitação**
+
+* Os dados de cadastro (não inclui senha) devem ser visíveis apenas para o proprietário do perfil.
+
+### **US05 \- Perfil Profissional de Prestador de Serviço**
+
+#### **História**
+
+Como prestador, eu gostaria de ter foto, descrição do meu trabalho e portfólio exibidos de forma pública no site.
+
+#### **Critérios de Aceitação**
+
+* Informações de de um prestador de serviço disponíveis para consulta por qualquer usuário autenticado.   
+* Perfil profissional deve incluir nome, categoria, foto de perfil, descrição.  
+* Perfil profissional pode incluir portfólio em PDF.
 
 
-### **US03 \- Recuperação de Senha**
+### **US06 \- Edição de Perfil de Usuário**
+
+#### **História**
+
+Como usuário, eu gostaria de alterar meus dados pessoais.
+
+#### **Critérios de Aceitação**
+
+* Todos os campos devem ser validados conforme seu tipo.
+
+### **US07 \- Edição Perfil Profissional de Prestador de Serviço**
+
+#### **História**
+
+Como prestador, eu gostaria de alterar minhas informações em meu perfil profissional.
+
+#### **Critérios de Aceitação**
+
+	
+
+* A inserção de descrição é obrigatória para o perfil se tornar público.  
+* A inserção de foto de perfil e portfólio(PDF) são opcionais.  
+* Todos os campos devem ser validados conforme seu tipo.
+
+
+### **US08 \- Recuperação de Senha**
 
 #### **História**
 
@@ -49,7 +109,7 @@ Como usuário, eu gostaria de recuperar meu acesso em caso de esquecimento de se
 * A tela de alteração de senha apenas aparece em caso de resposta correta na tela dois de recuperação.  
 * A tela de alterar senha deve conter os campos de nova senha e confirmar nova senha
 
-### **US04 \- Busca por Profissional**
+### **US09 \- Busca por Profissional**
 
 #### **História**
 
@@ -61,7 +121,7 @@ Como cliente, eu gostaria de buscar e encontrar um bom técnico de informática 
 * Resultados de busca devem ser exibidos em lista com informações de nome do profissional, tipo de serviço e preço médio.
 
 
-### **US05 \- Cadastro em Categorias**
+### **US10 \- Cadastro em Categorias**
 
 #### **História**
 
@@ -71,7 +131,7 @@ Como prestador de serviços, eu gostaria de me cadastrar em categorias específi
 
 * O sistema deve fornecer sistema de categorização de serviços.
 
-### **US06 \- Sistema de Avaliação**
+### **US11 \- Sistema de Avaliação**
 
 #### **História**
 
@@ -84,7 +144,7 @@ Como cliente, eu gostaria de saber se o profissional que estou contratando é bo
 * O sistema deve permitir que clientes façam avaliações em texto de serviços.
 
 
-### **US07 \- Troca de Mensagens**
+### **US12 \- Troca de Mensagens**
 
 #### **História**
 
@@ -105,7 +165,7 @@ Como cliente, eu gostaria de conversar com o prestador antes de contratar para t
 | US02 | Perfil Profissional | Alta |  |
 | US03 | Recuperação de Senha | Média |  |
 | US04 | Busca por Profissional | Alta |  |
-| US05 | Cadastro em categorias | Alta |  |
+| US05 | Cadastro em Categorias | Alta |  |
 | US06 | Sistema de Avaliação | Média |  |
 | US07 | Troca de Mensagens | Baixa |  |
 
