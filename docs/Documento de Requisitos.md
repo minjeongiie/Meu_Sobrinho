@@ -59,7 +59,7 @@ Como usuário, eu gostaria de visualizar meus dados pessoais.
 
 #### **História**
 
-Como prestador, eu gostaria de ter foto, descrição do meu trabalho e portfólio exibidos de forma pública no site.
+Como prestador, eu gostaria de ter foto, descrição do meu trabalho, valor médio de serviço  e portefólio exibidos de forma pública no site.
 
 #### **Critérios de Aceitação**
 
@@ -82,13 +82,13 @@ Como usuário, eu gostaria de alterar meus dados pessoais.
 
 #### **História**
 
-Como prestador, eu gostaria de alterar minhas informações em meu perfil profissional.
+Como prestador, eu gostaria de inserir minhas informações profissionais em meu perfil.
 
 #### **Critérios de Aceitação**
 
 	
 
-* A inserção de descrição é obrigatória para o perfil se tornar público.  
+* A inserção de descrição e valor médio de serviço são obrigatórios para o perfil se tornar público.  
 * A inserção de foto de perfil e portfólio(PDF) são opcionais.  
 * Todos os campos devem ser validados conforme seu tipo.
 
@@ -101,25 +101,38 @@ Como usuário, eu gostaria de recuperar meu acesso em caso de esquecimento de se
 
 #### **Critérios de Aceitação**
 
-* A tela de login deve disponibilizar um botão para tela de recuperação de senha.  
-* O formulário de cadastro de usuário deve conter os campos de pergunta de segurança e resposta de segurança.   
-* Na tela de recuperação de senha o sistema deve exibir um campo para preenchimento de e-mail a ser preenchido para prosseguir.  
-* A tela dois de recuperação aparece somente se o e-mail preenchido estiver cadastrado no sistema, caso contrário apresenta mensagem de erro.  
-* A tela dois de recuperação deve apresentar a pergunta de recuperação atrelada ao e-mail preenchido e um campo para resposta de recuperação.  
-* A tela de alteração de senha apenas aparece em caso de resposta correta na tela dois de recuperação.  
-* A tela de alterar senha deve conter os campos de nova senha e confirmar nova senha
+* Dados obrigatórios para recuperação de senha: E-mail e resposta de segurança.  
+* Pergunta e resposta de segurança são criadas pelo usuário no momento do cadastro.  
+* A opção de recuperação de senha deve estar sempre disponível na tela de login.  
+* Resposta de erro é exibida caso o E-mail apresentado não esteja cadastrado no sistema.  
+* Resposta de erro é exibida caso a resposta de segurança não seja correta.  
+* A nova senha deve ser confirmada duas vezes para concluir a alteração.  
+* Senhas distintas causam mensagem de erro.
 
 ### **US09 \- Busca por Profissional**
 
 #### **História**
 
-Como cliente, eu gostaria de buscar e encontrar um bom técnico de informática para fazer um orçamento.
+Como cliente, eu gostaria de fazer uma pesquisa para encontrar um prestador que atenda as minhas necessidades.
 
 #### **Critérios de Aceitação**
 
 * O sistema deve oferecer uma barra de pesquisa na página principal.  
-* Resultados de busca devem ser exibidos em lista com informações de nome do profissional, tipo de serviço e preço médio.
+* O sistema deve retornar profissionais cujo nome ou categoria corresponda ao termo pesquisado.  
+* O campo de texto não pode estar vazio.  
+* Resultados de busca devem ser exibidos em lista com informações de nome do profissional, categoria de serviço.
 
+
+### **US10 \- Filtro de Resultados de Pesquisa**
+
+#### **História**
+
+Como cliente, eu gostaria de filtrar minha pesquisa para conseguir resultados mais precisos.
+
+#### **Critérios de Aceitação**
+
+* O sistema deve oferecer opção de filtragem juntamente a barra de pesquisa.  
+* Os tipos de filtragem devem ser por nome, categoria e preço médio.
 
 ### **US10 \- Cadastro em Categorias**
 
@@ -129,18 +142,31 @@ Como prestador de serviços, eu gostaria de me cadastrar em categorias específi
 
 #### **Critérios de Aceitação**
 
-* O sistema deve fornecer sistema de categorização de serviços.
+* O sistema deve fornecer uma lista de categorias a serem selecionadas pelo prestador ao adicionar informações profissionais ao perfil.  
+* Novas categorias podem ser cadastradas pelo prestador
+
+### **US11 \- Contratar Serviço**
+
+#### **História**
+
+Como cliente, gostaria de registrar que contratei o profissional.
+
+#### **Critérios de Aceitação**
+
+* Apenas o cliente pode iniciar esse processo.  
+* O registo apenas ocorre com confirmação de ambas as partes.
 
 ### **US11 \- Sistema de Avaliação**
 
 #### **História**
 
-Como cliente, eu gostaria de saber se o profissional que estou contratando é bom em seu trabalho por meio de avaliações e comentários.
+Como cliente, eu gostaria de avaliar o serviço que recebi.
 
 #### **Critérios de Aceitação**
 
-* O sistema deve permitir que clientes façam avaliações em estrelas após terem recebido um serviço.  
-* Cliente e Profissional devem confirmar que o serviço foi finalizado antes da avaliação ficar disponível para ser realizada.  
+* A avaliação está apenas disponível após conclusão do serviço.  
+* As avaliações devem conter campos de avaliação por estrelas e por texto.  
+* A avaliação por texto pode estar vazia.  
 * O sistema deve permitir que clientes façam avaliações em texto de serviços.
 
 
@@ -161,11 +187,11 @@ Como cliente, eu gostaria de conversar com o prestador antes de contratar para t
 
 | ID | Nome | Prioridade | Estimativa (dias) |
 | :---- | :---- | :---- | :---- |
-| US01 | Login de Usuário | Alta |  |
-| US02 | Perfil Profissional | Alta |  |
-| US03 | Recuperação de Senha | Média |  |
-| US04 | Busca por Profissional | Alta |  |
-| US05 | Cadastro em Categorias | Alta |  |
-| US06 | Sistema de Avaliação | Média |  |
-| US07 | Troca de Mensagens | Baixa |  |
+| US01 | Cadastro de Cliente | Alta |  |
+| US02 | Cadastro de Prestador de Serviços | Alta |  |
+| US03 | Autenticação de Usuário | Alta |  |
+| US04 | Perfil de Usuário | Alta |  |
+| US05 | Perfil Profissional de Prestador de Serviço | Alta |  |
+| US06 | Edição de Perfil de Usuário | Média |  |
+| US07 | Edição Perfil Profissional de Prestador de Serviço | Alta |  |
 
