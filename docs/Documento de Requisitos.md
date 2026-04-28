@@ -4,6 +4,12 @@
 
 Este documento apresenta os requisitos funcionais e não funcionais do sistema Meu Sobrinho através de histórias de usuário.
 
+## **Atores**
+
+* Cliente  
+* Prestador de serviços
+
+
 ## **Histórias de Usuário**
 
 ### **US01 \- Cadastro de Cliente**
@@ -15,7 +21,7 @@ Como cliente, eu gostaria de me cadastrar para ter um perfil no site.
 #### **Critérios de Aceitação**
 
 * Apenas uma conta por E-mail é permitida.  
-* Nome completo e E-mail são obrigatórios.  
+* Nome completo e E-mail e CPF são obrigatórios.  
 * O sistema deve pedir preenchimento de senha duas vezes no ato de cadastro.  
 * Todos os campos devem ser validados conforme seu tipo.
 
@@ -134,7 +140,7 @@ Como cliente, eu gostaria de filtrar minha pesquisa para conseguir resultados ma
 * O sistema deve oferecer opção de filtragem juntamente a barra de pesquisa.  
 * Os tipos de filtragem devem ser por nome, categoria e preço médio.
 
-### **US10 \- Cadastro em Categorias**
+### **US11 \- Cadastro em Categorias**
 
 #### **História**
 
@@ -143,9 +149,9 @@ Como prestador de serviços, eu gostaria de me cadastrar em categorias específi
 #### **Critérios de Aceitação**
 
 * O sistema deve fornecer uma lista de categorias a serem selecionadas pelo prestador ao adicionar informações profissionais ao perfil.  
-* Novas categorias podem ser cadastradas pelo prestador
+* Novas categorias podem ser cadastradas pelo prestador.
 
-### **US11 \- Contratar Serviço**
+### **US12 \- Contratar Serviço**
 
 #### **História**
 
@@ -154,9 +160,19 @@ Como cliente, gostaria de registrar que contratei o profissional.
 #### **Critérios de Aceitação**
 
 * Apenas o cliente pode iniciar esse processo.  
-* O registo apenas ocorre com confirmação de ambas as partes.
+* A contratação apenas ocorre com confirmação de ambas as partes.
 
-### **US11 \- Sistema de Avaliação**
+### **US13 \- Histórico de Serviço**
+
+#### **História**
+
+Como usuário , gostaria de consultar contratações passadas.
+
+#### **Critérios de Aceitação**
+
+* O prestador e o cliente devem ter acesso a seus históricos de contratação.
+
+### **US14 \- Sistema de Avaliação**
 
 #### **História**
 
@@ -170,7 +186,7 @@ Como cliente, eu gostaria de avaliar o serviço que recebi.
 * O sistema deve permitir que clientes façam avaliações em texto de serviços.
 
 
-### **US12 \- Troca de Mensagens**
+### **US15 \- Troca de Mensagens**
 
 #### **História**
 
@@ -183,15 +199,44 @@ Como cliente, eu gostaria de conversar com o prestador antes de contratar para t
 * O sistema deve permitir que prestadores de serviços enviem e recebam mensagens.
 
 
-## **Backlog**
+## **Backlog do Produto**
 
 | ID | Nome | Prioridade | Estimativa (dias) |
 | :---- | :---- | :---- | :---- |
-| US01 | Cadastro de Cliente | Alta |  |
-| US02 | Cadastro de Prestador de Serviços | Alta |  |
-| US03 | Autenticação de Usuário | Alta |  |
-| US04 | Perfil de Usuário | Alta |  |
-| US05 | Perfil Profissional de Prestador de Serviço | Alta |  |
-| US06 | Edição de Perfil de Usuário | Média |  |
-| US07 | Edição Perfil Profissional de Prestador de Serviço | Alta |  |
+| US01 | Cadastro de Cliente | Alta | 2 dias |
+| US02 | Cadastro de Prestador de Serviços | Alta | 3 dias |
+| US03 | Autenticação de Usuário | Alta | 2 dias |
+| US04 | Perfil de Usuário | Média | 2 dias |
+| US05 | Perfil Profissional de Prestador de Serviço | Alta | 3 dias |
+| US06 | Edição de Perfil de Usuário | Média | 2 dias |
+| US07 | Edição Perfil Profissional de Prestador de Serviço | Alta | 2 dias |
+| US08 | Recuperação de Senha | Baixa | 2 dias |
+| US09 | Busca por Profissional | Alta | 3 dias |
+| US10 | FIltro de Resultados de Pesquisa | Baixa | 2 dias |
+| US11 | Cadastro em Categorias | Alta | 2 dias |
+| US12 | Contratar Serviço | Alta | 3 dias |
+| US13 | Histórico de Serviço | Média | 2 dias |
+| US14 | Sistema de Avaliação | Média | 3 dias |
+| US15 | Troca de Mensagem | Baixa | 4 dias |
 
+## **Requisitos não Funcionais**
+
+* ### Responsividade
+
+O sistema deve ser utilizado em dispositivos móveis e desktops. 
+
+* ### Compatibilidade 
+
+  O sistema deve funcionar nos principais navegadores modernos (Chrome, Edge, Firefox). 
+
+
+* ### Manutenibilidade 
+
+    
+  O desenvolvimento do sistema deve seguir o padrão MVC para facilitar a manutenção e evolução. 
+
+* ### Segurança
+
+    
+  Senhas devem ser armazenadas de forma criptografada.  
+  
