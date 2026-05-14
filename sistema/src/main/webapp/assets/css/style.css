@@ -1,0 +1,659 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f7fb;
+    color: #222;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #0f9d58 !important;
+}
+
+.nav-link {
+    color: #444 !important;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #0f9d58 !important;
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.hero {
+    padding: 80px 0;
+    background: linear-gradient(to right, #ffffff, #f4f6f9);
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.hero p {
+    color: #666;
+    font-size: 1.05rem;
+}
+
+.hero img {
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================
+   SEARCH CARD
+========================================= */
+
+.search-card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.form-control,
+.form-select {
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0f9d58;
+    box-shadow: 0 0 0 0.2rem rgba(15, 157, 88, 0.15);
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.btn-success,
+.btn-main {
+    background: #0f9d58;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    height: 50px;
+    font-weight: 600;
+    padding: 12px 24px;
+    transition: 0.3s;
+}
+
+.btn-success:hover,
+.btn-main:hover {
+    background: #0c7f47;
+    transform: translateY(-2px);
+}
+
+.btn-outline-success {
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.btn-dark-custom {
+    background: #222;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-dark-custom:hover {
+    background: #111;
+}
+
+/* =========================================
+   CATEGORY CARDS
+========================================= */
+
+.categoria-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px 15px;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+}
+
+.categoria-card:hover {
+    transform: translateY(-5px);
+}
+
+.categoria-card i {
+    margin-bottom: 12px;
+}
+
+.categoria-card h6 {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* =========================================
+   PROFESSIONAL CARDS
+========================================= */
+
+.card-profissional {
+    border: none;
+    border-radius: 22px;
+    overflow: hidden;
+    background: white;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.card-profissional:hover {
+    transform: translateY(-6px);
+}
+
+.card-profissional img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}
+
+.card-profissional .card-body {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.card-profissional h5 {
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.card-profissional p {
+    margin-bottom: 5px;
+}
+
+.card-profissional .price {
+    color: #0f9d58;
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+
+/* =========================================
+   LOGIN PAGE
+========================================= */
+
+.login-card {
+    width: 100%;
+    max-width: 430px;
+    border-radius: 25px;
+    padding: 35px;
+    background: white;
+}
+
+.login-card h2 {
+    color: #0f9d58;
+    font-weight: 700;
+}
+
+.login-card .form-control {
+    height: 52px;
+}
+
+/* =========================================
+   CADASTRO
+========================================= */
+
+.cadastro-card {
+    border-radius: 25px;
+    padding: 40px;
+    background: white;
+}
+
+.cadastro-card h2 {
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+/* =========================================
+   PERFIL INTERATIVO
+========================================= */
+
+.profile-card {
+    background: #fff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.profile-header {
+    background: linear-gradient(135deg, #0f9d58, #0b7a45);
+    padding: 50px 30px;
+    color: white;
+}
+
+.profile-avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 5px solid white;
+    object-fit: cover;
+}
+
+.profile-name {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.profile-role {
+    opacity: 0.9;
+    font-size: 1rem;
+}
+
+.profile-rating {
+    color: #ffc107;
+    font-size: 1rem;
+}
+
+.profile-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.profile-body {
+    padding: 35px;
+}
+
+.profile-section-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.profile-description {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* =========================================
+   PRICE BOX
+========================================= */
+
+.price-box {
+    background: #f5f7fb;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+}
+
+.price-box h2 {
+    color: #0f9d58;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+/* =========================================
+   STATUS SERVIÇO
+========================================= */
+
+.service-status {
+    padding: 15px;
+    border-radius: 14px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-confirmed {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-finished {
+    background: #cfe2ff;
+    color: #084298;
+}
+
+/* =========================================
+   MODAL / POPUP
+========================================= */
+
+.modal-content {
+    border-radius: 24px;
+    border: none;
+}
+
+.modal-header {
+    border-bottom: none;
+    padding: 25px 30px 10px;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.modal-body {
+    padding: 20px 30px 30px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    font-size: 1rem;
+}
+
+.contact-item i {
+    color: #0f9d58;
+    font-size: 1.2rem;
+}
+
+/* =========================================
+   REQUEST CARD
+========================================= */
+
+.request-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.request-card textarea {
+    resize: none;
+    border-radius: 14px;
+}
+
+/* =========================================
+   CONFIRMAR SERVIÇO
+========================================= */
+
+.confirm-service-btn {
+    background: #198754;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.confirm-service-btn:hover {
+    background: #146c43;
+}
+
+/* =========================================
+   SISTEMA DE AVALIAÇÃO
+========================================= */
+
+.review-section {
+    margin-top: 40px;
+    display: none;
+}
+
+.review-section.active {
+    display: block;
+}
+
+.review-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.stars {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.stars i {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.stars i.active {
+    color: #ffc107;
+}
+
+.stars i:hover {
+    transform: scale(1.1);
+}
+
+.review-box textarea {
+    border-radius: 16px;
+    resize: none;
+    min-height: 120px;
+}
+
+.review-btn {
+    margin-top: 15px;
+    background: #0f9d58;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.review-btn:hover {
+    background: #0c7f47;
+}
+
+/* =========================================
+   TIMELINE
+========================================= */
+
+.service-timeline {
+    margin-top: 35px;
+}
+
+.timeline-step {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.timeline-icon {
+    width: 40px;
+    height: 40px;
+    background: #0f9d58;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline-content h6 {
+    margin: 0;
+    font-weight: bold;
+}
+
+.timeline-content p {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   CHAT
+========================================= */
+
+.chat-container {
+    height: 80vh;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.chat-sidebar {
+    border-right: 1px solid #eee;
+    height: 100%;
+}
+
+.chat-message {
+    padding: 12px 18px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    max-width: 75%;
+}
+
+.message-received {
+    background: #f1f1f1;
+}
+
+.message-sent {
+    background: #0f9d58;
+    color: white;
+    margin-left: auto;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    background: #111;
+    color: white;
+    padding: 50px 0;
+}
+
+footer a {
+    color: #bbb;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: white;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 992px) {
+
+    .hero {
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 2.3rem;
+    }
+
+    .profile-header {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .search-card {
+        padding: 15px;
+    }
+
+    .categoria-card {
+        padding: 20px 10px;
+    }
+
+    .login-card,
+    .cadastro-card {
+        padding: 25px;
+    }
+
+    .profile-actions {
+        justify-content: center;
+    }
+
+    .profile-name {
+        font-size: 1.7rem;
+    }
+
+    .modal-body,
+    .modal-header {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .stars {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .hero {
+        padding: 50px 0;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .btn-success,
+    .form-control,
+    .form-select {
+        height: 48px;
+    }
+
+    .profile-header {
+        padding: 35px 20px;
+    }
+
+    .profile-body {
+        padding: 25px 20px;
+    }
+
+    .profile-avatar {
+        width: 110px;
+        height: 110px;
+    }
+
+    .btn-main,
+    .btn-dark-custom,
+    .confirm-service-btn,
+    .review-btn {
+        width: 100%;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+    }
+}
