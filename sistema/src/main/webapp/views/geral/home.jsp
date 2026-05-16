@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8"
+         pageEncoding="UTF-8" %>
+
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
@@ -27,8 +29,8 @@ bootstrap.min.css" rel="stylesheet">
         <li class="nav-item"><a class="nav-link" href="#">Seja um prestador</a></li>
       </ul>
       <div class="d-flex gap-2">
-        <a href="login.html" class="btn btn-outline-success">Entrar</a>
-        <a href="cadastro-cliente.jsp" class="btn btn-success">Cadastrar</a>
+        <a href="${pageContext.request.contextPath}/views/geral/login.jsp" class="btn btn-outline-success">Entrar</a>
+        <a href="${pageContext.request.contextPath}/views/cliente/cadastro-cliente.jsp" class="btn btn-success">Cadastrar</a>
       </div>
     </div>
   </div>

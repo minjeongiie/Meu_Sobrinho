@@ -5,6 +5,6 @@
          version="6.0">
 
     <welcome-file-list>
-        <welcome-file>views/geral/cadastro-cliente.jsp</welcome-file>
+        <welcome-file>views/geral/home.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
