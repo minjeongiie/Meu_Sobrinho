@@ -62,6 +62,6 @@ public class UsuarioController extends HttpServlet {
 
         usuarioService.cadastrar(usuario,confirmarSenha);
 
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("views/geral/login.jsp");
     }
 }

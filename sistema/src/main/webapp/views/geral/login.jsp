@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8"
+         pageEncoding="UTF-8" %>
+
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -19,16 +21,17 @@
             <p class="text-muted">Bem-vindo de volta!</p>
         </div>
 
-        <form id="loginForm">
+        <form id="loginForm" action="${pageContext.request.contextPath}/login"
+              method="post">
 
             <div class="mb-3">
                 <label class="form-label">E-mail</label>
-                <input type="email" class="form-control" id="email">
+                <input type="email" class="form-control" name="email" id="email">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Senha</label>
-                <input type="password" class="form-control" id="senha">
+                <input type="password" class="form-control" name="senha" id="senha">
             </div>
 
             <div class="d-grid mb-3">

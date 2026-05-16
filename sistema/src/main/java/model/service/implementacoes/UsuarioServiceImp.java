@@ -76,6 +76,36 @@ public class UsuarioServiceImp
         }
     }
 
+    @Override
+    public Usuario autenticar(String email, String senha
+    ) {
+
+        Usuario usuario =
+                usuarioDAO.buscarPorEmail(email);
+
+        if (usuario == null) {
+
+            throw new IllegalArgumentException(
+                    "Email ou senha inválidos"
+            );
+        }
+
+        boolean senhaCorreta =
+                Criptografia.verificarSenha(
+                        senha,
+                        usuario.getSenha()
+                );
+
+        if (!senhaCorreta) {
+
+            throw new IllegalArgumentException(
+                    "Email ou senha inválidos"
+            );
+        }
+
+        return usuario;
+    }
+
     private void validarConfirmacaoSenha(
             String senha,
             String confirmarSenha
