@@ -1,0 +1,51 @@
+<%@ page contentType="text/html;charset=UTF-8"
+         pageEncoding="UTF-8" %>
+
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="sistema/src/main/webapp/assets/css/style.css">
+</head>
+<body class="bg-light">
+
+<div class="container vh-100 d-flex align-items-center justify-content-center">
+
+    <div class="card shadow border-0 rounded-4 p-4 login-card">
+
+        <div class="text-center mb-4">
+            <h2 class="text-success fw-bold">Meu Sobrinho</h2>
+            <p class="text-muted">Bem-vindo de volta!</p>
+        </div>
+
+        <form id="loginForm" action="${pageContext.request.contextPath}/login"
+              method="post">
+
+            <div class="mb-3">
+                <label class="form-label">E-mail</label>
+                <input type="email" class="form-control" name="email" id="email">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Senha</label>
+                <input type="password" class="form-control" name="senha" id="senha">
+            </div>
+
+            <div class="d-grid mb-3">
+                <button class="btn btn-success">Entrar</button>
+            </div>
+
+            <div class="text-center">
+                <a href="#" class="text-decoration-none text-success">Esqueceu sua senha?</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
