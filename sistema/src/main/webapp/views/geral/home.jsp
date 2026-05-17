@@ -1,17 +1,18 @@
-<%@ page contentType="text/html;charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Meu Sobrinho — Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Home - Meu Sobrinho</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/css/custom.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet">
 </head>
 <body>
-<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm">
   <div class="container">
-    <a class="navbar-brand header-brand" href="index.html">
+    <a class="navbar-brand header-brand" href="${pageContext.request.contextPath}/home.jsp">
       <div class="brand-badge">MS</div>
       <div>
         <div class="fw-bold">Meu Sobrinho</div>
@@ -19,9 +20,9 @@
       </div>
     </a>
 
-    <form class="d-none d-lg-flex ms-3" action="search.html" method="get">
+    <form class="d-none d-lg-flex ms-3" action="${pageContext.request.contextPath}/search" method="get">
       <div class="input-group search-input">
-        <input name="q" class="form-control" placeholder="Buscar por serviço, tecnologia ou cidade">
+        <input name="q" class="form-control" placeholder="Buscar por serviço, tecnologia ou cidade" value="${param.q}">
         <button class="btn btn-outline-secondary" type="submit">Buscar</button>
       </div>
     </form>
@@ -32,46 +33,49 @@
 
     <div class="collapse navbar-collapse" id="navMain">
       <ul class="navbar-nav ms-auto align-items-lg-center">
-        <li class="nav-item"><a class="nav-link" href="search.html">Buscar</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">Sobre</a></li>
-        <li class="nav-item"><a class="btn btn-outline-primary ms-lg-3" href="login.html">Entrar</a></li>
-        <li class="nav-item"><a class="btn btn-primary ms-2" href="register.html">Cadastrar</a></li>
+        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/search.jsp">Buscar</a></li>
+        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/home.jsp#about">Sobre</a></li>
+        <c:choose>
+          <c:when test="${not empty sessionScope.user}">
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/client-profile.jsp">Meu Perfil</a></li>
+            <li class="nav-item">
+              <form action="${pageContext.request.contextPath}/auth/logout" method="post" style="display:inline">
+                <button class="btn btn-outline-secondary">Sair</button>
+              </form>
+            </li>
+          </c:when>
+          <c:otherwise>
+            <li class="nav-item"><a class="btn btn-outline-primary ms-lg-3" href="${pageContext.request.contextPath}/login.jsp">Entrar</a></li>
+            <li class="nav-item"><a class="btn btn-primary ms-2" href="${pageContext.request.contextPath}/register.jsp">Cadastrar</a></li>
+          </c:otherwise>
+        </c:choose>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- Hero -->
-<main class="container py-5">
+<main class="container py-4">
   <div class="row align-items-center">
     <div class="col-lg-7">
-      <h1 class="display-6">Encontre profissionais de TI iniciantes com confiança</h1>
-      <p class="text-muted">Perfis com portfólio, avaliações e contato direto — serviços acessíveis para pequenas demandas.</p>
+      <h1 class="display-6">Encontre profissionais iniciantes com confiança</h1>
+      <p class="text-muted">Perfis com portfólio, avaliações e contato — serviços acessíveis para pequenas demandas.</p>
       <div class="mt-3">
-        <a href="search.html" class="btn btn-primary me-2">Buscar profissionais</a>
-        <a href="register-provider.html" class="btn btn-outline-secondary">Quero oferecer serviços</a>
-      </div>
-
-      <div class="row row-cols-1 row-cols-md-3 g-3 mt-4">
-        <div class="col"><div class="card card-shadow"><div class="card-body"><h5 class="card-title">Suporte</h5><p class="small-muted">Instalação, configuração e suporte remoto.</p></div></div></div>
-        <div class="col"><div class="card card-shadow"><div class="card-body"><h5 class="card-title">Desenvolvimento</h5><p class="small-muted">Sites, landing pages e automações simples.</p></div></div></div>
-        <div class="col"><div class="card card-shadow"><div class="card-body"><h5 class="card-title">Manutenção</h5><p class="small-muted">Atualizações, backups e otimização.</p></div></div></div>
+        <a href="${pageContext.request.contextPath}/search.jsp" class="btn btn-primary me-2">Buscar profissionais</a>
+        <a href="${pageContext.request.contextPath}/register-provider.jsp" class="btn btn-outline-secondary">Quero oferecer serviços</a>
       </div>
     </div>
-
     <div class="col-lg-5">
       <div class="card card-shadow">
         <div class="card-body">
           <h5 class="card-title">Para prestadores</h5>
-          <p class="small-muted">Crie seu perfil, adicione portfólio e receba contatos.</p>
-          <a href="register-provider.html" class="btn btn-primary w-100">Criar perfil</a>
+          <p class="small-muted">Crie seu perfil, adicione portfólio e receba pedidos.</p>
+          <a href="${pageContext.request.contextPath}/register-provider.jsp" class="btn btn-primary w-100">Criar perfil</a>
         </div>
       </div>
     </div>
   </div>
 </main>
 
-<!-- Footer -->
 <footer class="bg-white footer-small">
   <div class="container text-center text-muted">
     © <span id="year"></span> Meu Sobrinho. Todos os direitos reservados.
@@ -79,6 +83,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/app.js"></script>
+<script>document.getElementById && (document.getElementById('year').textContent = new Date().getFullYear());</script>
 </body>
 </html>
