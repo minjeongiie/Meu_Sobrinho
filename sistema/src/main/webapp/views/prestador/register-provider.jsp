@@ -27,8 +27,10 @@
                         <div class="alert alert-danger">${requestScope.error}</div>
                     </c:if>
 
-                    <form action="${pageContext.request.contextPath}/auth/register" method="post" class="needs-validation" novalidate>
-                        <input type="hidden" name="type" value="provider">
+                    <form action="${pageContext.request.contextPath}/cadastro" method="post" class="needs-validation" novalidate>
+                        <input type="hidden"
+                               name="tipoUsuario"
+                               value="PRESTADOR">
                         <div class="mb-3">
                             <label class="form-label">Nome completo</label>
                             <input name="name" class="form-control" required>
@@ -48,10 +50,10 @@
                                 <label class="form-label">Categoria</label>
                                 <select name="category" class="form-select" required>
                                     <option value="">Selecione</option>
-                                    <option>Eletricista</option>
-                                    <option>Encanador</option>
-                                    <option>Pedreiro</option>
-                                    <option>Carpinteiro</option>
+                                    <option>Frontend</option>
+                                    <option>Backend</option>
+                                    <option>Manutenção</option>
+                                    <option>Infraestrutura</option>
                                 </select>
                             </div>
                         </div>
