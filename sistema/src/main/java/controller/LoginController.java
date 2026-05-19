@@ -36,7 +36,7 @@ public class LoginController extends HttpServlet {
                 request.getParameter("email");
 
         String senha =
-                request.getParameter("senha");
+                request.getParameter("password");
 
         try {
 
@@ -65,7 +65,7 @@ public class LoginController extends HttpServlet {
 
                 response.sendRedirect(
                         request.getContextPath()
-                                + "/views/prestador/perfil.jsp"
+                                + "/views/prestador/proflie.jsp"
                 );
 
             } else {

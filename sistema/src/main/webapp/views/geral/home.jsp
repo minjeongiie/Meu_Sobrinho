@@ -45,8 +45,8 @@
             </li>
           </c:when>
           <c:otherwise>
-            <li class="nav-item"><a class="btn btn-outline-primary ms-lg-3" href="${pageContext.request.contextPath}/login.jsp">Entrar</a></li>
-            <li class="nav-item"><a class="btn btn-primary ms-2" href="${pageContext.request.contextPath}/register.jsp">Cadastrar</a></li>
+            <li class="nav-item"><a class="btn btn-outline-primary ms-lg-3" href="${pageContext.request.contextPath}/views/geral/login.jsp">Entrar</a></li>
+            <li class="nav-item"><a class="btn btn-primary ms-2" href="${pageContext.request.contextPath}/views/geral/register.jsp">Cadastrar</a></li>
           </c:otherwise>
         </c:choose>
       </ul>
@@ -60,8 +60,8 @@
       <h1 class="display-6">Encontre profissionais iniciantes com confiança</h1>
       <p class="text-muted">Perfis com portfólio, avaliações e contato — serviços acessíveis para pequenas demandas.</p>
       <div class="mt-3">
-        <a href="${pageContext.request.contextPath}/search.jsp" class="btn btn-primary me-2">Buscar profissionais</a>
-        <a href="${pageContext.request.contextPath}/register-provider.jsp" class="btn btn-outline-secondary">Quero oferecer serviços</a>
+        <a href="${pageContext.request.contextPath}/views/geral/search.jsp" class="btn btn-primary me-2">Buscar profissionais</a>
+        <a href="${pageContext.request.contextPath}/views/prestador/register-provider.jsp" class="btn btn-outline-secondary">Quero oferecer serviços</a>
       </div>
     </div>
     <div class="col-lg-5">
@@ -69,7 +69,7 @@
         <div class="card-body">
           <h5 class="card-title">Para prestadores</h5>
           <p class="small-muted">Crie seu perfil, adicione portfólio e receba pedidos.</p>
-          <a href="${pageContext.request.contextPath}/register-provider.jsp" class="btn btn-primary w-100">Criar perfil</a>
+          <a href="${pageContext.request.contextPath}/views/prestador/register-provider.jsp" class="btn btn-primary w-100">Criar perfil</a>
         </div>
       </div>
     </div>

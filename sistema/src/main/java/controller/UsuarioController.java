@@ -29,9 +29,9 @@ public class UsuarioController extends HttpServlet {
 
         String tipoUsuario = request.getParameter("tipoUsuario");
 
-        String senha = request.getParameter("senha");
+        String senha = request.getParameter("password");
         String confirmarSenha =
-                request.getParameter("confirmarSenha");
+                request.getParameter("password2");
 
         Usuario usuario;
 
@@ -47,18 +47,18 @@ public class UsuarioController extends HttpServlet {
 
             Prestador prestador = new Prestador();
 
-            prestador.setCpfCnpj(request.getParameter("cpfCnpj"));
+            prestador.setCpfCnpj(request.getParameter("doc"));
             prestador.setCelular(request.getParameter("celular"));
 
             usuario = prestador;
         }
 
-        usuario.setNomeCompleto(request.getParameter("nomeCompleto"));
+        usuario.setNomeCompleto(request.getParameter("name"));
         usuario.setEmail(request.getParameter("email"));
         usuario.setSenha(senha);
 
-        usuario.setPerguntaSeguranca(request.getParameter("perguntaSeguranca"));
-        usuario.setRespostaSeguranca(request.getParameter("respostaSeguranca"));
+        usuario.setPerguntaSeguranca(request.getParameter("securityQuestion"));
+        usuario.setRespostaSeguranca(request.getParameter("securityAnswer"));
 
         usuarioService.cadastrar(usuario,confirmarSenha);
 

@@ -33,7 +33,7 @@
                 <div class="alert alert-danger">${requestScope.error}</div>
             </c:if>
 
-            <form action="${pageContext.request.contextPath}/auth/login" method="post" class="needs-validation" novalidate>
+            <form action="${pageContext.request.contextPath}/login" method="post" class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label class="form-label">Email</label>
                     <input name="email" type="email" class="form-control" required>
@@ -44,10 +44,10 @@
                 </div>
                 <div class="d-flex gap-2 mb-3">
                     <button class="btn btn-primary w-100" type="submit">Entrar</button>
-                    <a href="${pageContext.request.contextPath}/register.jsp" class="btn btn-outline-secondary">Criar conta</a>
+                    <a href="${pageContext.request.contextPath}/views/geral/register.jsp" class="btn btn-outline-secondary">Criar conta</a>
                 </div>
                 <div class="d-flex justify-content-between small-muted">
-                    <a href="${pageContext.request.contextPath}/recover.jsp">Esqueci minha senha</a>
+                    <a href="${pageContext.request.contextPath}/views/geral/recover.jsp">Esqueci minha senha</a>
                     <a href="${pageContext.request.contextPath}/register-provider.jsp">Sou prestador</a>
                 </div>
             </form>

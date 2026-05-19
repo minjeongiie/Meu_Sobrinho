@@ -27,8 +27,10 @@
                         <div class="alert alert-danger">${requestScope.error}</div>
                     </c:if>
 
-                    <form action="${pageContext.request.contextPath}/auth/register" method="post" class="needs-validation" novalidate>
-                        <input type="hidden" name="type" value="client">
+                    <form action="${pageContext.request.contextPath}/cadastro" method="post" class="needs-validation" novalidate>
+                        <input type="hidden"
+                               name="tipoUsuario"
+                               value="CLIENTE">
                         <div class="mb-3">
                             <label class="form-label">Nome completo</label>
                             <input name="name" class="form-control" required>
