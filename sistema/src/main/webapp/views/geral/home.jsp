@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm">
   <div class="container">
-    <a class="navbar-brand header-brand" href="${pageContext.request.contextPath}/home.jsp">
+    <a class="navbar-brand header-brand" href="${pageContext.request.contextPath}/views/geral/home.jsp">
       <div class="brand-badge">MS</div>
       <div>
         <div class="fw-bold">Meu Sobrinho</div>
@@ -20,7 +20,7 @@
       </div>
     </a>
 
-    <form class="d-none d-lg-flex ms-3" action="${pageContext.request.contextPath}/search" method="get">
+    <form class="d-none d-lg-flex ms-3" action="${pageContext.request.contextPath}/buscar-prestadores" method="get">
       <div class="input-group search-input">
         <input name="q" class="form-control" placeholder="Buscar por serviço, tecnologia ou cidade" value="${param.q}">
         <button class="btn btn-outline-secondary" type="submit">Buscar</button>
@@ -33,13 +33,13 @@
 
     <div class="collapse navbar-collapse" id="navMain">
       <ul class="navbar-nav ms-auto align-items-lg-center">
-        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/search.jsp">Buscar</a></li>
-        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/home.jsp#about">Sobre</a></li>
+        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/buscar-prestadores">Buscar</a></li>
+        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/views/geral/home.jsp#about">Sobre</a></li>
         <c:choose>
-          <c:when test="${not empty sessionScope.user}">
+          <c:when test="${not empty sessionScope.usuarioLogado}">
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/client-profile.jsp">Meu Perfil</a></li>
             <li class="nav-item">
-              <form action="${pageContext.request.contextPath}/auth/logout" method="post" style="display:inline">
+              <form action="${pageContext.request.contextPath}/logout" method="get" style="display:inline">
                 <button class="btn btn-outline-secondary">Sair</button>
               </form>
             </li>
@@ -60,7 +60,7 @@
       <h1 class="display-6">Encontre profissionais iniciantes com confiança</h1>
       <p class="text-muted">Perfis com portfólio, avaliações e contato — serviços acessíveis para pequenas demandas.</p>
       <div class="mt-3">
-        <a href="${pageContext.request.contextPath}/views/geral/search.jsp" class="btn btn-primary me-2">Buscar profissionais</a>
+        <a href="${pageContext.request.contextPath}/buscar-prestadores" class="btn btn-primary me-2">Buscar profissionais</a>
         <a href="${pageContext.request.contextPath}/views/prestador/register-provider.jsp" class="btn btn-outline-secondary">Quero oferecer serviços</a>
       </div>
     </div>

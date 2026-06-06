@@ -96,4 +96,58 @@ public class FakeUsuarioDAO implements UsuarioDAO {
 
         return prestadores;
     }
+    @Override
+    public List<Prestador> buscarPrestadores(String termo) {
+
+        List<Prestador> resultados =
+                new ArrayList<>();
+
+        if (termo == null || termo.trim().isEmpty()) {
+
+            return listarPrestadores();
+        }
+
+        String termoBusca =
+                termo.toLowerCase();
+
+        for (Usuario usuario : usuarios) {
+
+            if (!(usuario instanceof Prestador prestador)) {
+                continue;
+            }
+
+            if (!prestador.isPerfilPublico()) {
+                continue;
+            }
+
+            boolean encontrouNoNome =
+                    prestador.getNomeCompleto() != null
+                            && prestador.getNomeCompleto()
+                            .toLowerCase()
+                            .contains(termoBusca);
+
+            boolean encontrouNaDescricao =
+                    prestador.getDescricao() != null
+                            && prestador.getDescricao()
+                            .toLowerCase()
+                            .contains(termoBusca);
+
+            boolean encontrouNaCategoria =
+                    prestador.getCategoria() != null
+                            && prestador.getCategoria().getNome() != null
+                            && prestador.getCategoria()
+                            .getNome()
+                            .toLowerCase()
+                            .contains(termoBusca);
+
+            if (encontrouNoNome
+                    || encontrouNaDescricao
+                    || encontrouNaCategoria) {
+
+                resultados.add(prestador);
+            }
+        }
+
+        return resultados;
+    }
 }

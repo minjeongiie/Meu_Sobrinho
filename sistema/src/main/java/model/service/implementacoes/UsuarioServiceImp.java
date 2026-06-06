@@ -148,4 +148,10 @@ public class UsuarioServiceImp
 
         return usuarioDAO.listarPrestadores();
     }
+
+    @Override
+    public List<Prestador> buscarPrestadores(String termo) {
+
+        return usuarioDAO.buscarPrestadores(termo);
+    }
 }

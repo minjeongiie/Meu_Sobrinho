@@ -14,4 +14,6 @@ public interface UsuarioService {
     Usuario buscarPorId(Long id);
 
     List<Prestador> listarPrestadores();
+
+    List<Prestador> buscarPrestadores(String termo);
 }
