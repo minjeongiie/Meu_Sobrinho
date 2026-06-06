@@ -50,10 +50,10 @@
                                 <label class="form-label">Categoria</label>
                                 <select name="category" class="form-select" required>
                                     <option value="">Selecione</option>
-                                    <option>Frontend</option>
-                                    <option>Backend</option>
-                                    <option>Manutenção</option>
-                                    <option>Infraestrutura</option>
+                                    <option value="1">Frontend</option>
+                                    <option value="2">Backend</option>
+                                    <option value="3">Manutenção</option>
+                                    <option value="4">Infraestrutura</option>
                                 </select>
                             </div>
                         </div>
