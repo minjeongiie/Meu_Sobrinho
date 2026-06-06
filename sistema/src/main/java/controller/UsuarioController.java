@@ -5,10 +5,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.entity.Categoria;
 import model.entity.Cliente;
 import model.entity.Prestador;
 import model.entity.Usuario;
+import model.service.implementacoes.CategoriaServiceImp;
 import model.service.implementacoes.UsuarioServiceImp;
+import model.service.interfaces.CategoriaService;
 import model.service.interfaces.UsuarioService;
 
 import java.io.IOException;
@@ -17,10 +20,13 @@ import java.io.IOException;
 public class UsuarioController extends HttpServlet {
 
     private UsuarioService usuarioService;
+    private CategoriaService categoriaService;
 
     @Override
     public void init() {
+
         usuarioService = new UsuarioServiceImp();
+        categoriaService = new CategoriaServiceImp();
     }
 
     @Override
@@ -30,12 +36,11 @@ public class UsuarioController extends HttpServlet {
         String tipoUsuario = request.getParameter("tipoUsuario");
 
         String senha = request.getParameter("password");
-        String confirmarSenha =
-                request.getParameter("password2");
+        String confirmarSenha = request.getParameter("password2");
 
         Usuario usuario;
 
-        if (tipoUsuario.equals("CLIENTE")) {
+        if ("CLIENTE".equals(tipoUsuario)) {
 
             Cliente cliente = new Cliente();
 
@@ -49,6 +54,22 @@ public class UsuarioController extends HttpServlet {
 
             prestador.setCpfCnpj(request.getParameter("doc"));
             prestador.setCelular(request.getParameter("celular"));
+            prestador.setDescricao(request.getParameter("bio"));
+
+            // Perfil público por padrão
+            prestador.setPerfilPublico(true);
+
+            // Valores iniciais
+            prestador.setValorMedio(0.0);
+            prestador.setPortfolio(null);
+
+            Long categoriaId = Long.parseLong(
+                    request.getParameter("category"));
+
+            Categoria categoria =
+                    categoriaService.buscarPorId(categoriaId);
+
+            prestador.setCategoria(categoria);
 
             usuario = prestador;
         }
@@ -57,11 +78,16 @@ public class UsuarioController extends HttpServlet {
         usuario.setEmail(request.getParameter("email"));
         usuario.setSenha(senha);
 
-        usuario.setPerguntaSeguranca(request.getParameter("securityQuestion"));
-        usuario.setRespostaSeguranca(request.getParameter("securityAnswer"));
+        usuario.setPerguntaSeguranca(
+                request.getParameter("securityQuestion"));
 
-        usuarioService.cadastrar(usuario,confirmarSenha);
+        usuario.setRespostaSeguranca(
+                request.getParameter("securityAnswer"));
 
-        response.sendRedirect("views/geral/login.jsp");
+        usuarioService.cadastrar(usuario, confirmarSenha);
+
+        response.sendRedirect(
+                request.getContextPath() +
+                        "/views/geral/login.jsp");
     }
 }

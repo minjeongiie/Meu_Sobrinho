@@ -65,7 +65,7 @@ public class LoginController extends HttpServlet {
 
                 response.sendRedirect(
                         request.getContextPath()
-                                + "/views/prestador/proflie.jsp"
+                                + "/views/geral/home.jsp"
                 );
 
             } else {

@@ -2,10 +2,13 @@ package model.service.implementacoes;
 
 import model.dao.implementacoes.FakeUsuarioDAO;
 import model.dao.interfaces.UsuarioDAO;
+import model.entity.Prestador;
 import util.UsuarioJaExisteException;
 import model.entity.Usuario;
 import model.service.interfaces.UsuarioService;
 import util.Criptografia;
+
+import java.util.List;
 
 public class UsuarioServiceImp
         implements UsuarioService {
@@ -132,5 +135,23 @@ public class UsuarioServiceImp
                     "Já existe um usuário cadastrado com esse email"
             );
         }
+    }
+
+    @Override
+    public Usuario buscarPorId(Long id) {
+
+        return usuarioDAO.buscarPorId(id);
+    }
+
+    @Override
+    public List<Prestador> listarPrestadores() {
+
+        return usuarioDAO.listarPrestadores();
+    }
+
+    @Override
+    public List<Prestador> buscarPrestadores(String termo) {
+
+        return usuarioDAO.buscarPrestadores(termo);
     }
 }
