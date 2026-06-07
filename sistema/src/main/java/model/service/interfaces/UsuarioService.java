@@ -11,6 +11,8 @@ public interface UsuarioService {
 
     Usuario autenticar(String email, String senha);
 
+    void atualizarPerfil(Usuario usuario, String senhaAtual);
+
     Usuario buscarPorId(Long id);
 
     List<Prestador> listarPrestadores();

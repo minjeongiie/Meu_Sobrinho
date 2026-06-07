@@ -9,6 +9,8 @@ public interface UsuarioDAO {
 
     void salvar(Usuario usuario);
 
+    void atualizar(Usuario usuario);
+
     Usuario buscarPorEmail(String email);
 
     Usuario buscarPorId(Long id);

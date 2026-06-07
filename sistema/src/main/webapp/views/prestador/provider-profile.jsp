@@ -87,7 +87,10 @@
                         <%= prestador.isPerfilPublico() ? "Público" : "Privado" %>
                     </div>
 
-                    <a href="#" class="btn btn-primary mt-3">Editar Perfil</a>
+                    <a href="${pageContext.request.contextPath}/editar-perfil"
+                       class="btn btn-primary mt-3">
+                        Editar Perfil
+                    </a>
                 </div>
             </div>
         </div>

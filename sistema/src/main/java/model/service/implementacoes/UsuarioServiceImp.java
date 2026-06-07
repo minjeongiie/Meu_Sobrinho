@@ -109,6 +109,38 @@ public class UsuarioServiceImp
         return usuario;
     }
 
+    @Override
+    public void atualizarPerfil(
+            Usuario usuario,
+            String senhaAtual
+    ) {
+
+        Usuario usuarioBanco =
+                usuarioDAO.buscarPorId(usuario.getId());
+
+        if (usuarioBanco == null) {
+
+            throw new IllegalArgumentException(
+                    "Usuário não encontrado."
+            );
+        }
+
+        boolean senhaCorreta =
+                Criptografia.verificarSenha(
+                        senhaAtual,
+                        usuarioBanco.getSenha()
+                );
+
+        if (!senhaCorreta) {
+
+            throw new IllegalArgumentException(
+                    "Senha atual incorreta."
+            );
+        }
+
+        usuarioDAO.atualizar(usuario);
+    }
+
     private void validarConfirmacaoSenha(
             String senha,
             String confirmarSenha

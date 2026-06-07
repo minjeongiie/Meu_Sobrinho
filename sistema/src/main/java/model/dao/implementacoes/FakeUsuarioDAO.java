@@ -55,6 +55,32 @@ public class FakeUsuarioDAO implements UsuarioDAO {
     }
 
     @Override
+    public void atualizar(Usuario usuarioAtualizado) {
+
+        for (int i = 0; i < usuarios.size(); i++) {
+
+            Usuario usuario = usuarios.get(i);
+
+            if (usuario.getId().equals(usuarioAtualizado.getId())) {
+
+                usuarios.set(i, usuarioAtualizado);
+
+                System.out.println("=== USUÁRIO ATUALIZADO ===");
+                System.out.println("ID: " + usuarioAtualizado.getId());
+                System.out.println("Nome: " + usuarioAtualizado.getNomeCompleto());
+                System.out.println("Email: " + usuarioAtualizado.getEmail());
+                System.out.println("===========================");
+
+                return;
+            }
+        }
+
+        throw new IllegalArgumentException(
+                "Usuário não encontrado para atualização."
+        );
+    }
+
+    @Override
     public Usuario buscarPorEmail(String email) {
 
         for (Usuario usuario : usuarios) {
