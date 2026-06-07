@@ -37,7 +37,7 @@
         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/views/geral/home.jsp#about">Sobre</a></li>
         <c:choose>
           <c:when test="${not empty sessionScope.usuarioLogado}">
-            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/client-profile.jsp">Meu Perfil</a></li>
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/perfil">Meu Perfil</a></li>
             <li class="nav-item">
               <form action="${pageContext.request.contextPath}/logout" method="get" style="display:inline">
                 <button class="btn btn-outline-secondary">Sair</button>
