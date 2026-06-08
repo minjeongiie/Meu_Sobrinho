@@ -12,10 +12,10 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/home.jsp">MS Meu Sobrinho</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/views/geral/home.jsp">MS Meu Sobrinho</a>
         <div class="collapse navbar-collapse" id="navMain">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/register.jsp">Cadastrar</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/views/geral/register.jsp">Cadastrar</a></li>
             </ul>
         </div>
     </div>
@@ -29,7 +29,7 @@
             <c:if test="${not empty param.registered}">
                 <div class="alert alert-success">Conta criada com sucesso. Faça login.</div>
             </c:if>
-            <c:if test="${not empty requestScope.error}">
+            <c:if test="${not empty requestScope.erro}">
                 <div class="alert alert-danger">${requestScope.error}</div>
             </c:if>
 
@@ -48,7 +48,7 @@
                 </div>
                 <div class="d-flex justify-content-between small-muted">
                     <a href="${pageContext.request.contextPath}/views/geral/recover.jsp">Esqueci minha senha</a>
-                    <a href="${pageContext.request.contextPath}/register-provider.jsp">Sou prestador</a>
+                    <a href="${pageContext.request.contextPath}/views/prestador/register-provider.jsp">Sou prestador</a>
                 </div>
             </form>
         </div>

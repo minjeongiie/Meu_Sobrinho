@@ -25,21 +25,24 @@
                 <div class="alert alert-danger">${requestScope.error}</div>
             </c:if>
 
-            <form action="${pageContext.request.contextPath}/jobs" method="post" class="needs-validation" novalidate>
-                <input type="hidden" name="clientId" value="${sessionScope.user.id}">
+            <form action="${pageContext.request.contextPath}/solicitar-contratacao" method="post" class="needs-validation" novalidate>
                 <input type="hidden" name="providerId" value="${param.providerId}">
+
                 <div class="mb-3">
                     <label class="form-label">Descrição</label>
                     <textarea name="description" class="form-control" rows="4" required></textarea>
                 </div>
+
                 <div class="mb-3">
-                    <label class="form-label">Preço (R$)</label>
-                    <input name="price" type="number" step="0.01" class="form-control">
+                    <label class="form-label">Preço sugerido (R$)</label>
+                    <input name="price" type="number" step="0.01" min="0" class="form-control">
                 </div>
+
                 <div class="mb-3">
                     <label class="form-label">Data solicitada</label>
                     <input name="requestedDate" type="date" class="form-control">
                 </div>
+
                 <button class="btn btn-primary" type="submit">Enviar pedido</button>
             </form>
         </div>

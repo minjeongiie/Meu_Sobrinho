@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.entity.Cliente;
 import model.entity.Prestador;
 import model.entity.Usuario;
 import model.service.implementacoes.UsuarioServiceImp;
@@ -95,6 +96,15 @@ public class PerfilPrestadorController extends HttpServlet {
 
             return;
         }
+
+        Usuario usuarioLogado =
+                (Usuario) request.getSession()
+                        .getAttribute("usuarioLogado");
+
+        request.setAttribute(
+                "ehCliente",
+                usuarioLogado instanceof Cliente
+        );
 
         request.setAttribute(
                 "prestador",

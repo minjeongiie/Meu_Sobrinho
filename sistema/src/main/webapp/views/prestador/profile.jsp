@@ -36,6 +36,12 @@
 
             <div class="card-body">
 
+                <c:if test="${param.contratacao == 'sucesso'}">
+                    <div class="alert alert-success">
+                        Solicitação de contratação enviada com sucesso.
+                    </div>
+                </c:if>
+
                 <h4>${prestador.nomeCompleto}</h4>
 
                 <div class="small-muted mb-3">
@@ -64,6 +70,13 @@
                 </c:if>
 
                 <div class="mt-4">
+
+                    <c:if test="${ehCliente}">
+                        <a href="${pageContext.request.contextPath}/views/cliente/hire.jsp?providerId=${prestador.id}"
+                           class="btn btn-primary">
+                            Contratar
+                        </a>
+                    </c:if>
 
                     <a href="javascript:history.back()"
                        class="btn btn-outline-secondary">

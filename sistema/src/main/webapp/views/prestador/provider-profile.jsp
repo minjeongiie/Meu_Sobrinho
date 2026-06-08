@@ -40,6 +40,29 @@
 </nav>
 
 <main class="container py-4">
+
+    <c:if test="${param.contratacao == 'aceita'}">
+        <div class="alert alert-success">
+            Solicitação aceita com sucesso.
+        </div>
+    </c:if>
+    
+    <c:if test="${param.contratacao == 'concluida'}">
+        <div class="alert alert-success">
+            Contratação concluída com sucesso.
+        </div>
+    </c:if>
+    <c:if test="${param.contratacao == 'recusada'}">
+        <div class="alert alert-warning">
+            Solicitação recusada com sucesso.
+        </div>
+    </c:if>
+    <c:if test="${param.contratacao == 'contraproposta'}">
+        <div class="alert alert-info">
+            Contraproposta enviada com sucesso.
+        </div>
+    </c:if>
+
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-3">
@@ -93,6 +116,423 @@
                     </a>
                 </div>
             </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6>Solicitações recebidas</h6>
+
+                    <c:set var="temPendentes" value="false" />
+
+                    <c:forEach var="contratacao" items="${contratacoes}">
+                        <c:if test="${contratacao.status == 'PENDENTE'}">
+                            <c:set var="temPendentes" value="true" />
+
+                            <div class="border rounded p-3 mb-3">
+
+                                <div class="mb-2">
+                                    <strong>Cliente:</strong>
+                                        ${nomesClientes[contratacao.clienteId]}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Descrição:</strong>
+                                        ${contratacao.descricao}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Preço sugerido:</strong>
+                                    <c:choose>
+                                        <c:when test="${not empty contratacao.preco}">
+                                            R$ ${contratacao.preco}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Não informado
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Data solicitada:</strong>
+                                    <c:choose>
+                                        <c:when test="${not empty contratacao.dataSolicitada}">
+                                            ${contratacao.dataSolicitada}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Não informada
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Status:</strong>
+                                    PENDENTE
+                                </div>
+
+                                <form action="${pageContext.request.contextPath}/gerenciar-contratacao"
+                                      method="post"
+                                      class="mt-2">
+
+                                    <input type="hidden"
+                                           name="contratacaoId"
+                                           value="${contratacao.id}">
+
+                                    <input type="hidden"
+                                           name="acao"
+                                           value="aceitar">
+
+                                    <button type="submit"
+                                            class="btn btn-success btn-sm">
+                                        Aceitar
+                                    </button>
+                                </form>
+
+                                <form action="${pageContext.request.contextPath}/gerenciar-contratacao"
+                                      method="post">
+
+                                    <input type="hidden"
+                                           name="contratacaoId"
+                                           value="${contratacao.id}">
+
+                                    <input type="hidden"
+                                           name="acao"
+                                           value="recusar">
+
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm">
+                                        Recusar
+                                    </button>
+                                </form>
+                                <button class="btn btn-outline-primary btn-sm"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#contraproposta-${contratacao.id}">
+                                    Enviar contraproposta
+                                </button>
+
+                                <div class="collapse mt-3"
+                                     id="contraproposta-${contratacao.id}">
+
+                                    <form action="${pageContext.request.contextPath}/gerenciar-contratacao"
+                                          method="post">
+
+                                        <input type="hidden"
+                                               name="contratacaoId"
+                                               value="${contratacao.id}">
+
+                                        <input type="hidden"
+                                               name="acao"
+                                               value="contraproposta">
+
+                                        <div class="mb-2">
+                                            <label class="form-label">
+                                                Valor da contraproposta
+                                            </label>
+
+                                            <input type="number"
+                                                   name="valorContraproposta"
+                                                   step="0.01"
+                                                   min="0"
+                                                   class="form-control"
+                                                   required>
+                                        </div>
+
+                                        <div class="mb-2">
+                                            <label class="form-label">
+                                                Mensagem da contraproposta
+                                            </label>
+
+                                            <textarea name="mensagemContraproposta"
+                                                      class="form-control"
+                                                      rows="3"
+                                                      required></textarea>
+                                        </div>
+
+                                        <button type="submit"
+                                                class="btn btn-primary btn-sm">
+                                            Confirmar contraproposta
+                                        </button>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:if test="${not temPendentes}">
+                        <p class="text-muted mb-0">
+                            Nenhuma solicitação pendente.
+                        </p>
+                    </c:if>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6>Contrapropostas enviadas</h6>
+
+                    <c:set var="temContrapropostas" value="false" />
+
+                    <c:forEach var="contratacao" items="${contratacoes}">
+                        <c:if test="${contratacao.status == 'CONTRAPROPOSTA'}">
+                            <c:set var="temContrapropostas" value="true" />
+
+                            <div class="border rounded p-3 mb-3">
+
+                                <div class="mb-2">
+                                    <strong>Cliente:</strong>
+                                        ${nomesClientes[contratacao.clienteId]}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Descrição:</strong>
+                                        ${contratacao.descricao}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Preço sugerido pelo cliente:</strong>
+                                    <c:choose>
+                                        <c:when test="${not empty contratacao.preco}">
+                                            R$ ${contratacao.preco}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Não informado
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Valor da contraproposta:</strong>
+                                    R$ ${contratacao.valorContraproposta}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Mensagem da contraproposta:</strong>
+                                        ${contratacao.mensagemContraproposta}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Status:</strong>
+                                    Aguardando resposta do cliente
+                                </div>
+
+                            </div>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:if test="${not temContrapropostas}">
+                        <p class="text-muted mb-0">
+                            Nenhuma contraproposta enviada.
+                        </p>
+                    </c:if>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6>Contratações aceitas</h6>
+
+                    <c:set var="temAceitas" value="false" />
+
+                    <c:forEach var="contratacao" items="${contratacoes}">
+                        <c:if test="${contratacao.status == 'ACEITA'}">
+                            <c:set var="temAceitas" value="true" />
+
+                            <div class="border rounded p-3 mb-3">
+
+                                <div class="mb-2">
+                                    <strong>Cliente:</strong>
+                                        ${nomesClientes[contratacao.clienteId]}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Descrição:</strong>
+                                        ${contratacao.descricao}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Preço:</strong>
+                                    <c:choose>
+                                        <c:when test="${not empty contratacao.preco}">
+                                            R$ ${contratacao.preco}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Não informado
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Data solicitada:</strong>
+                                    <c:choose>
+                                        <c:when test="${not empty contratacao.dataSolicitada}">
+                                            ${contratacao.dataSolicitada}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Não informada
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Status:</strong>
+                                    Em andamento
+                                </div>
+
+                                <form action="${pageContext.request.contextPath}/gerenciar-contratacao"
+                                      method="post"
+                                      class="mt-2">
+
+                                    <input type="hidden"
+                                           name="contratacaoId"
+                                           value="${contratacao.id}">
+
+                                    <input type="hidden"
+                                           name="acao"
+                                           value="concluir">
+
+                                    <button type="submit"
+                                            class="btn btn-primary btn-sm">
+                                        Concluir
+                                    </button>
+                                </form>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:if test="${not temAceitas}">
+                        <p class="text-muted mb-0">
+                            Nenhuma contratação aceita no momento.
+                        </p>
+                    </c:if>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6>Contratações concluídas</h6>
+
+                    <c:set var="temConcluidas" value="false" />
+
+                    <c:forEach var="contratacao" items="${contratacoes}">
+                        <c:if test="${contratacao.status == 'CONCLUIDA'}">
+                            <c:set var="temConcluidas" value="true" />
+
+                            <div class="border rounded p-3 mb-3">
+
+                                <div class="mb-2">
+                                    <strong>Cliente:</strong>
+                                        ${nomesClientes[contratacao.clienteId]}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Descrição:</strong>
+                                        ${contratacao.descricao}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Preço:</strong>
+                                    <c:choose>
+                                        <c:when test="${not empty contratacao.preco}">
+                                            R$ ${contratacao.preco}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Não informado
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Data solicitada:</strong>
+                                    <c:choose>
+                                        <c:when test="${not empty contratacao.dataSolicitada}">
+                                            ${contratacao.dataSolicitada}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Não informada
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Status:</strong>
+                                    Concluída
+                                </div>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:if test="${not temConcluidas}">
+                        <p class="text-muted mb-0">
+                            Nenhuma contratação concluída ainda.
+                        </p>
+                    </c:if>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6>Contratações recusadas</h6>
+
+                    <c:set var="temRecusadas" value="false" />
+
+                    <c:forEach var="contratacao" items="${contratacoes}">
+                        <c:if test="${contratacao.status == 'RECUSADA'}">
+                            <c:set var="temRecusadas" value="true" />
+
+                            <div class="border rounded p-3 mb-3">
+
+                                <div class="mb-2">
+                                    <strong>Cliente:</strong>
+                                        ${nomesClientes[contratacao.clienteId]}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Descrição:</strong>
+                                        ${contratacao.descricao}
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Preço:</strong>
+                                    <c:choose>
+                                        <c:when test="${not empty contratacao.preco}">
+                                            R$ ${contratacao.preco}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Não informado
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Data solicitada:</strong>
+                                    <c:choose>
+                                        <c:when test="${not empty contratacao.dataSolicitada}">
+                                            ${contratacao.dataSolicitada}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Não informada
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+                                <div class="mb-2">
+                                    <strong>Status:</strong>
+                                    Recusada
+                                </div>
+
+                            </div>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:if test="${not temRecusadas}">
+                        <p class="text-muted mb-0">
+                            Nenhuma contratação recusada.
+                        </p>
+                    </c:if>
+                </div>
+            </div>
+
         </div>
     </div>
 </main>

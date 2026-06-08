@@ -1,9 +1,11 @@
 package model.dao.implementacoes;
 
 import model.dao.interfaces.UsuarioDAO;
+import model.entity.Categoria;
 import model.entity.Cliente;
 import model.entity.Prestador;
 import model.entity.Usuario;
+import util.Criptografia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,39 @@ public class FakeUsuarioDAO implements UsuarioDAO {
             new ArrayList<>();
 
     private static Long proximoId = 1L;
+
+    static {
+        Cliente cliente = new Cliente();
+        cliente.setId(proximoId++);
+        cliente.setNomeCompleto("Cliente Teste");
+        cliente.setEmail("cliente@teste.com");
+        cliente.setSenha(Criptografia.criptografarSenha("123"));
+        cliente.setCpf("12345678900");
+        cliente.setPerguntaSeguranca("Nome do primeiro pet?");
+        cliente.setRespostaSeguranca("Rex");
+
+        usuarios.add(cliente);
+
+        Categoria categoria = new Categoria();
+        categoria.setId(1L);
+        categoria.setNome("Desenvolvimento Web");
+
+        Prestador prestador = new Prestador();
+        prestador.setId(proximoId++);
+        prestador.setNomeCompleto("Prestador Teste");
+        prestador.setEmail("prestador@teste.com");
+        prestador.setSenha(Criptografia.criptografarSenha("123"));
+        prestador.setCpfCnpj("12345678901");
+        prestador.setCelular("(21) 99999-9999");
+        prestador.setCategoria(categoria);
+        prestador.setDescricao("Criação de sites, sistemas web e manutenção de aplicações.");
+        prestador.setValorMedio(150.00);
+        prestador.setPerfilPublico(true);
+        prestador.setPerguntaSeguranca("Nome do primeiro pet?");
+        prestador.setRespostaSeguranca("Rex");
+
+        usuarios.add(prestador);
+    }
 
     @Override
     public void salvar(Usuario usuario) {
