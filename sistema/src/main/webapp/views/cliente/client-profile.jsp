@@ -53,8 +53,21 @@
         </div>
     </c:if>
 
+    <c:if test="${param.avaliacao == 'sucesso'}">
+        <div class="alert alert-success">
+            Avaliação enviada com sucesso.
+        </div>
+    </c:if>
+
+    <c:if test="${param.avaliacao == 'erro'}">
+        <div class="alert alert-danger">
+            Não foi possível enviar a avaliação.
+        </div>
+    </c:if>
+
     <div class="row justify-content-center">
         <div class="col-md-8">
+
             <div class="card mb-3">
                 <div class="card-body">
                     <h5>Olá, <%= usuario.getNomeCompleto() %></h5>
@@ -211,10 +224,113 @@
                                         </div>
                                     </c:if>
 
+                                    <c:if test="${contratacao.status == 'CONCLUIDA'}">
+
+                                        <c:choose>
+                                            <c:when test="${avaliacoesPorContratacao[contratacao.id] != null}">
+
+                                                <div class="alert alert-success mt-3">
+
+                                                    <h6>Avaliação enviada</h6>
+
+                                                    <div>
+                                                        <strong>Nota:</strong>
+                                                            ${avaliacoesPorContratacao[contratacao.id].nota}/5
+                                                    </div>
+
+                                                    <div>
+                                                        <strong>Comentário:</strong>
+                                                        <c:choose>
+                                                            <c:when test="${not empty avaliacoesPorContratacao[contratacao.id].comentario}">
+                                                                ${avaliacoesPorContratacao[contratacao.id].comentario}
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Sem comentário.
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
+
+                                                </div>
+
+                                            </c:when>
+
+                                            <c:otherwise>
+
+                                                <button class="btn btn-outline-primary btn-sm"
+                                                        type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#avaliacao-${contratacao.id}">
+                                                    Avaliar prestador
+                                                </button>
+
+                                                <div class="collapse mt-3"
+                                                     id="avaliacao-${contratacao.id}">
+
+                                                    <div class="card">
+                                                        <div class="card-body">
+
+                                                            <form action="${pageContext.request.contextPath}/avaliacao"
+                                                                  method="post">
+
+                                                                <input type="hidden"
+                                                                       name="contratacaoId"
+                                                                       value="${contratacao.id}">
+
+                                                                <input type="hidden"
+                                                                       name="prestadorId"
+                                                                       value="${contratacao.prestadorId}">
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">
+                                                                        Nota
+                                                                    </label>
+
+                                                                    <select name="nota"
+                                                                            class="form-select"
+                                                                            required>
+
+                                                                        <option value="">Selecione</option>
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4">4</option>
+                                                                        <option value="5">5</option>
+
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">
+                                                                        Comentário
+                                                                    </label>
+
+                                                                    <textarea name="comentario"
+                                                                              class="form-control"
+                                                                              rows="3"></textarea>
+                                                                </div>
+
+                                                                <button type="submit"
+                                                                        class="btn btn-primary btn-sm">
+                                                                    Enviar avaliação
+                                                                </button>
+
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                    </c:if>
+
                                 </div>
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>
+
                 </div>
             </div>
 
@@ -227,6 +343,10 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>document.getElementById && (document.getElementById('year').textContent = new Date().getFullYear());</script>
+<script>
+    document.getElementById &&
+    (document.getElementById('year').textContent =
+        new Date().getFullYear());
+</script>
 </body>
 </html>

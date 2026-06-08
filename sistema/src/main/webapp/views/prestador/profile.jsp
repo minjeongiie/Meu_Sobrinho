@@ -69,6 +69,51 @@
 
                 </c:if>
 
+                <hr>
+
+                <h6>Avaliações</h6>
+
+                <div class="mb-3">
+
+                    <strong>Nota média:</strong>
+
+                    <c:choose>
+                        <c:when test="${totalAvaliacoes > 0}">
+                            ${mediaAvaliacoes} / 5
+                            (${totalAvaliacoes} avaliações)
+                        </c:when>
+
+                        <c:otherwise>
+                            Ainda não possui avaliações.
+                        </c:otherwise>
+                    </c:choose>
+
+                </div>
+
+                <c:if test="${not empty avaliacoes}">
+
+                    <c:forEach var="avaliacao" items="${avaliacoes}">
+
+                        <div class="border rounded p-3 mb-3">
+
+                            <div class="mb-2">
+                                <strong>Nota:</strong>
+                                    ${avaliacao.nota}/5
+                            </div>
+
+                            <c:if test="${not empty avaliacao.comentario}">
+                                <div>
+                                    <strong>Comentário:</strong>
+                                        ${avaliacao.comentario}
+                                </div>
+                            </c:if>
+
+                        </div>
+
+                    </c:forEach>
+
+                </c:if>
+
                 <div class="mt-4">
 
                     <c:if test="${ehCliente}">

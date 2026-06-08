@@ -534,6 +534,49 @@
             </div>
 
         </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6>Minhas Avaliações</h6>
+
+                    <div class="mb-3">
+                        <strong>Nota média:</strong><br>
+
+                        <c:choose>
+                            <c:when test="${totalAvaliacoes > 0}">
+                                ${mediaAvaliacoes} / 5
+                                <br>
+                                <span class="text-muted">
+                            ${totalAvaliacoes} avaliações
+                        </span>
+                            </c:when>
+
+                            <c:otherwise>
+                        <span class="text-muted">
+                            Ainda não possui avaliações.
+                        </span>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+
+                    <c:if test="${not empty avaliacoes}">
+                        <c:forEach var="avaliacao" items="${avaliacoes}">
+                            <div class="border rounded p-2 mb-2">
+                                <div>
+                                    <strong>${avaliacao.nota}/5</strong>
+                                </div>
+
+                                <c:if test="${not empty avaliacao.comentario}">
+                                    <div class="small text-muted">
+                                            ${avaliacao.comentario}
+                                    </div>
+                                </c:if>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 

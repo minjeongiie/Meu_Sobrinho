@@ -3,15 +3,13 @@ package controller;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import model.entity.Cliente;
-import model.entity.Contratacao;
-import model.entity.Prestador;
-import model.entity.Usuario;
+import model.entity.*;
+import model.service.implementacoes.AvaliacaoServiceImp;
 import model.service.implementacoes.ContratacaoServiceImp;
 import model.service.implementacoes.UsuarioServiceImp;
+import model.service.interfaces.AvaliacaoService;
 import model.service.interfaces.ContratacaoService;
 import model.service.interfaces.UsuarioService;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -22,11 +20,13 @@ public class PerfilController extends HttpServlet {
 
     private ContratacaoService contratacaoService;
     private UsuarioService usuarioService;
+    private AvaliacaoService avaliacaoService;
 
     @Override
     public void init() {
         contratacaoService = new ContratacaoServiceImp();
         usuarioService = new UsuarioServiceImp();
+        avaliacaoService = new AvaliacaoServiceImp();
     }
 
     @Override
@@ -74,6 +74,24 @@ public class PerfilController extends HttpServlet {
                 }
             }
 
+            Map<Long, Avaliacao> avaliacoesPorContratacao =
+                    new HashMap<>();
+
+            for (Contratacao contratacao : contratacoes) {
+
+                Avaliacao avaliacao =
+                        avaliacaoService.buscarPorContratacao(
+                                contratacao.getId()
+                        );
+
+                if (avaliacao != null) {
+                    avaliacoesPorContratacao.put(
+                            contratacao.getId(),
+                            avaliacao
+                    );
+                }
+            }
+
             request.setAttribute(
                     "contratacoes",
                     contratacoes
@@ -82,6 +100,11 @@ public class PerfilController extends HttpServlet {
             request.setAttribute(
                     "nomesPrestadores",
                     nomesPrestadores
+            );
+
+            request.setAttribute(
+                    "avaliacoesPorContratacao",
+                    avaliacoesPorContratacao
             );
 
             request.getRequestDispatcher(
@@ -111,6 +134,21 @@ public class PerfilController extends HttpServlet {
                 }
             }
 
+            List<Avaliacao> avaliacoes =
+                    avaliacaoService.listarPorPrestador(
+                            usuario.getId()
+                    );
+
+            double mediaAvaliacoes =
+                    avaliacaoService.calcularMediaPorPrestador(
+                            usuario.getId()
+                    );
+
+            int totalAvaliacoes =
+                    avaliacaoService.contarAvaliacoesPorPrestador(
+                            usuario.getId()
+                    );
+
             request.setAttribute(
                     "contratacoes",
                     contratacoes
@@ -119,6 +157,21 @@ public class PerfilController extends HttpServlet {
             request.setAttribute(
                     "nomesClientes",
                     nomesClientes
+            );
+
+            request.setAttribute(
+                    "avaliacoes",
+                    avaliacoes
+            );
+
+            request.setAttribute(
+                    "mediaAvaliacoes",
+                    mediaAvaliacoes
+            );
+
+            request.setAttribute(
+                    "totalAvaliacoes",
+                    totalAvaliacoes
             );
 
             request.getRequestDispatcher(
