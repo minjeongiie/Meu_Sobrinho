@@ -87,6 +87,21 @@
                                     </div>
                                 </c:if>
 
+                                <div class="mb-2">
+                                    <strong>Avaliação:</strong>
+
+                                    <c:choose>
+                                        <c:when test="${totaisAvaliacoes[p.id] > 0}">
+                                            ${mediasAvaliacoes[p.id]} / 5
+                                            (${totaisAvaliacoes[p.id]} avaliações)
+                                        </c:when>
+
+                                        <c:otherwise>
+                                            Ainda sem avaliações
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
                                 <div>
                                         ${p.descricao}
                                 </div>

@@ -40,8 +40,34 @@
 </nav>
 
 <main class="container py-4">
+
+    <c:if test="${param.contratacao == 'aceita'}">
+        <div class="alert alert-success">
+            Contraproposta aceita com sucesso.
+        </div>
+    </c:if>
+
+    <c:if test="${param.contratacao == 'recusada'}">
+        <div class="alert alert-warning">
+            Contraproposta recusada.
+        </div>
+    </c:if>
+
+    <c:if test="${param.avaliacao == 'sucesso'}">
+        <div class="alert alert-success">
+            Avaliação enviada com sucesso.
+        </div>
+    </c:if>
+
+    <c:if test="${param.avaliacao == 'erro'}">
+        <div class="alert alert-danger">
+            Não foi possível enviar a avaliação.
+        </div>
+    </c:if>
+
     <div class="row justify-content-center">
         <div class="col-md-8">
+
             <div class="card mb-3">
                 <div class="card-body">
                     <h5>Olá, <%= usuario.getNomeCompleto() %></h5>
@@ -71,6 +97,243 @@
                     </a>
                 </div>
             </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h6>Minhas contratações</h6>
+
+                    <c:choose>
+                        <c:when test="${empty contratacoes}">
+                            <p class="text-muted mb-0">
+                                Você ainda não solicitou nenhuma contratação.
+                            </p>
+                        </c:when>
+
+                        <c:otherwise>
+                            <c:forEach var="contratacao" items="${contratacoes}">
+                                <div class="border rounded p-3 mb-3">
+
+                                    <div class="mb-2">
+                                        <strong>Prestador:</strong>
+                                            ${nomesPrestadores[contratacao.prestadorId]}
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <strong>Descrição:</strong>
+                                            ${contratacao.descricao}
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <strong>Preço sugerido:</strong>
+                                        <c:choose>
+                                            <c:when test="${not empty contratacao.preco}">
+                                                R$ ${contratacao.preco}
+                                            </c:when>
+                                            <c:otherwise>
+                                                Não informado
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <strong>Data solicitada:</strong>
+                                        <c:choose>
+                                            <c:when test="${not empty contratacao.dataSolicitada}">
+                                                ${contratacao.dataSolicitada}
+                                            </c:when>
+                                            <c:otherwise>
+                                                Não informada
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <strong>Status:</strong>
+                                        <c:choose>
+                                            <c:when test="${contratacao.status == 'PENDENTE'}">
+                                                Aguardando resposta do prestador
+                                            </c:when>
+                                            <c:when test="${contratacao.status == 'CONTRAPROPOSTA'}">
+                                                Contraproposta recebida
+                                            </c:when>
+                                            <c:when test="${contratacao.status == 'ACEITA'}">
+                                                Em andamento
+                                            </c:when>
+                                            <c:when test="${contratacao.status == 'CONCLUIDA'}">
+                                                Concluída
+                                            </c:when>
+                                            <c:when test="${contratacao.status == 'RECUSADA'}">
+                                                Recusada
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${contratacao.status}
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+
+                                    <c:if test="${contratacao.status == 'CONTRAPROPOSTA'}">
+                                        <div class="alert alert-info mt-3 mb-2">
+
+                                            <div class="mb-2">
+                                                <strong>Valor da contraproposta:</strong>
+                                                R$ ${contratacao.valorContraproposta}
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <strong>Mensagem do prestador:</strong>
+                                                    ${contratacao.mensagemContraproposta}
+                                            </div>
+
+                                            <div class="d-flex gap-2 mt-2">
+
+                                                <form action="${pageContext.request.contextPath}/gerenciar-contratacao"
+                                                      method="post">
+
+                                                    <input type="hidden"
+                                                           name="contratacaoId"
+                                                           value="${contratacao.id}">
+
+                                                    <input type="hidden"
+                                                           name="acao"
+                                                           value="aceitar">
+
+                                                    <button type="submit"
+                                                            class="btn btn-success btn-sm">
+                                                        Aceitar contraproposta
+                                                    </button>
+                                                </form>
+
+                                                <form action="${pageContext.request.contextPath}/gerenciar-contratacao"
+                                                      method="post">
+
+                                                    <input type="hidden"
+                                                           name="contratacaoId"
+                                                           value="${contratacao.id}">
+
+                                                    <input type="hidden"
+                                                           name="acao"
+                                                           value="recusar">
+
+                                                    <button type="submit"
+                                                            class="btn btn-danger btn-sm">
+                                                        Recusar contraproposta
+                                                    </button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </c:if>
+
+                                    <c:if test="${contratacao.status == 'CONCLUIDA'}">
+
+                                        <c:choose>
+                                            <c:when test="${avaliacoesPorContratacao[contratacao.id] != null}">
+
+                                                <div class="alert alert-success mt-3">
+
+                                                    <h6>Avaliação enviada</h6>
+
+                                                    <div>
+                                                        <strong>Nota:</strong>
+                                                            ${avaliacoesPorContratacao[contratacao.id].nota}/5
+                                                    </div>
+
+                                                    <div>
+                                                        <strong>Comentário:</strong>
+                                                        <c:choose>
+                                                            <c:when test="${not empty avaliacoesPorContratacao[contratacao.id].comentario}">
+                                                                ${avaliacoesPorContratacao[contratacao.id].comentario}
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                Sem comentário.
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
+
+                                                </div>
+
+                                            </c:when>
+
+                                            <c:otherwise>
+
+                                                <button class="btn btn-outline-primary btn-sm"
+                                                        type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#avaliacao-${contratacao.id}">
+                                                    Avaliar prestador
+                                                </button>
+
+                                                <div class="collapse mt-3"
+                                                     id="avaliacao-${contratacao.id}">
+
+                                                    <div class="card">
+                                                        <div class="card-body">
+
+                                                            <form action="${pageContext.request.contextPath}/avaliacao"
+                                                                  method="post">
+
+                                                                <input type="hidden"
+                                                                       name="contratacaoId"
+                                                                       value="${contratacao.id}">
+
+                                                                <input type="hidden"
+                                                                       name="prestadorId"
+                                                                       value="${contratacao.prestadorId}">
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">
+                                                                        Nota
+                                                                    </label>
+
+                                                                    <select name="nota"
+                                                                            class="form-select"
+                                                                            required>
+
+                                                                        <option value="">Selecione</option>
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4">4</option>
+                                                                        <option value="5">5</option>
+
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">
+                                                                        Comentário
+                                                                    </label>
+
+                                                                    <textarea name="comentario"
+                                                                              class="form-control"
+                                                                              rows="3"></textarea>
+                                                                </div>
+
+                                                                <button type="submit"
+                                                                        class="btn btn-primary btn-sm">
+                                                                    Enviar avaliação
+                                                                </button>
+
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                    </c:if>
+
+                                </div>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+
+                </div>
+            </div>
+
         </div>
     </div>
 </main>
@@ -80,6 +343,10 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>document.getElementById && (document.getElementById('year').textContent = new Date().getFullYear());</script>
+<script>
+    document.getElementById &&
+    (document.getElementById('year').textContent =
+        new Date().getFullYear());
+</script>
 </body>
 </html>

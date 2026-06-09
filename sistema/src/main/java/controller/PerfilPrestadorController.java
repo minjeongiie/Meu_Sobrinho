@@ -5,23 +5,32 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.entity.Avaliacao;
+import model.entity.Cliente;
 import model.entity.Prestador;
 import model.entity.Usuario;
+import model.service.implementacoes.AvaliacaoServiceImp;
 import model.service.implementacoes.UsuarioServiceImp;
+import model.service.interfaces.AvaliacaoService;
 import model.service.interfaces.UsuarioService;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/perfil-prestador")
 public class PerfilPrestadorController extends HttpServlet {
 
     private UsuarioService usuarioService;
+    private AvaliacaoService avaliacaoService;
 
     @Override
     public void init() {
 
         usuarioService =
                 new UsuarioServiceImp();
+
+        avaliacaoService =
+                new AvaliacaoServiceImp();
     }
 
     @Override
@@ -96,9 +105,44 @@ public class PerfilPrestadorController extends HttpServlet {
             return;
         }
 
+        Usuario usuarioLogado =
+                (Usuario) request.getSession()
+                        .getAttribute("usuarioLogado");
+
+        List<Avaliacao> avaliacoes =
+                avaliacaoService.listarPorPrestador(
+                        prestador.getId()
+                );
+
+        double mediaAvaliacoes =
+                avaliacaoService.calcularMediaPorPrestador(prestador.getId());
+
+        int totalAvaliacoes =
+                avaliacaoService.contarAvaliacoesPorPrestador(prestador.getId());
+
+        request.setAttribute(
+                "ehCliente",
+                usuarioLogado instanceof Cliente
+        );
+
         request.setAttribute(
                 "prestador",
                 prestador
+        );
+
+        request.setAttribute(
+                "avaliacoes",
+                avaliacoes
+        );
+
+        request.setAttribute(
+                "mediaAvaliacoes",
+                mediaAvaliacoes
+        );
+
+        request.setAttribute(
+                "totalAvaliacoes",
+                totalAvaliacoes
         );
 
         request.getRequestDispatcher(

@@ -84,7 +84,7 @@ public class LoginController extends HttpServlet {
             );
 
             request.getRequestDispatcher(
-                    "/views/login.jsp"
+                    "/views/geral/login.jsp"
             ).forward(request, response);
         }
     }
