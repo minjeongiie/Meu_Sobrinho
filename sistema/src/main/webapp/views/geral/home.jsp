@@ -34,7 +34,6 @@
     <div class="collapse navbar-collapse" id="navMain">
       <ul class="navbar-nav ms-auto align-items-lg-center">
         <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/buscar-prestadores">Buscar</a></li>
-        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/views/geral/home.jsp#about">Sobre</a></li>
         <c:choose>
           <c:when test="${not empty sessionScope.usuarioLogado}">
             <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/perfil">Meu Perfil</a></li>

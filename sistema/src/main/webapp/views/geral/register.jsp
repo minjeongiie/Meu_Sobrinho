@@ -39,6 +39,10 @@
                             <label class="form-label">Email</label>
                             <input name="email" type="email" class="form-control" required>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Telefone</label>
+                            <input name="telefone" type="tel" class="form-control" required>
+                        </div>
                         <div class="mb-3 row">
                             <div class="col">
                                 <label class="form-label">Senha</label>
