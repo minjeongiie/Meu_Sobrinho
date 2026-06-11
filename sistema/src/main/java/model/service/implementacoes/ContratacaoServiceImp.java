@@ -1,6 +1,6 @@
 package model.service.implementacoes;
 
-import model.dao.implementacoes.FakeContratacaoDAO;
+import model.dao.implementacoes.MySQLContratacaoDAO;
 import model.dao.interfaces.ContratacaoDAO;
 import model.entity.Contratacao;
 import model.entity.StatusContratacao;
@@ -14,7 +14,7 @@ public class ContratacaoServiceImp implements ContratacaoService {
     private final ContratacaoDAO contratacaoDAO;
 
     public ContratacaoServiceImp() {
-        this.contratacaoDAO = new FakeContratacaoDAO();
+        this.contratacaoDAO = new MySQLContratacaoDAO();
     }
 
     @Override

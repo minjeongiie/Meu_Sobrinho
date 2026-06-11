@@ -46,6 +46,18 @@
                                 <label class="form-label">Documento (CPF/CNPJ)</label>
                                 <input name="doc" class="form-control" required>
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    Celular
+                                </label>
+
+                                <input
+                                        name="celular"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="(21) 99999-9999"
+                                        required>
+                            </div>
                             <div class="col-md-6">
                                 <label class="form-label">Categoria</label>
                                 <select name="category" class="form-select" required>

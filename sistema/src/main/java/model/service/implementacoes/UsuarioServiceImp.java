@@ -1,6 +1,6 @@
 package model.service.implementacoes;
 
-import model.dao.implementacoes.FakeUsuarioDAO;
+import model.dao.implementacoes.MySQLUsuarioDAO;
 import model.dao.interfaces.UsuarioDAO;
 import model.entity.Cliente;
 import model.entity.Prestador;
@@ -17,7 +17,7 @@ public class UsuarioServiceImp
     private final UsuarioDAO usuarioDAO;
 
     public UsuarioServiceImp() {
-        this.usuarioDAO = new FakeUsuarioDAO();
+        this.usuarioDAO = new MySQLUsuarioDAO();
     }
 
     @Override
