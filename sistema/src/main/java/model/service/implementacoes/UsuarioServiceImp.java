@@ -1,7 +1,8 @@
 package model.service.implementacoes;
 
-import model.dao.implementacoes.FakeUsuarioDAO;
+import model.dao.implementacoes.MySQLUsuarioDAO;
 import model.dao.interfaces.UsuarioDAO;
+import model.entity.Cliente;
 import model.entity.Prestador;
 import util.UsuarioJaExisteException;
 import model.entity.Usuario;
@@ -16,7 +17,7 @@ public class UsuarioServiceImp
     private final UsuarioDAO usuarioDAO;
 
     public UsuarioServiceImp() {
-        this.usuarioDAO = new FakeUsuarioDAO();
+        this.usuarioDAO = new MySQLUsuarioDAO();
     }
 
     @Override
@@ -49,33 +50,103 @@ public class UsuarioServiceImp
     private void validarCampos(Usuario usuario) {
 
         if (usuario.getNomeCompleto() == null
-                || usuario.getNomeCompleto()
-                .trim()
-                .isEmpty()) {
+                || usuario.getNomeCompleto().trim().isEmpty()) {
 
             throw new IllegalArgumentException(
-                    "Nome obrigatório"
+                    "Nome obrigatório."
+            );
+        }
+
+        if (usuario.getNomeCompleto().trim().length() < 3) {
+
+            throw new IllegalArgumentException(
+                    "O nome deve ter pelo menos 3 caracteres."
             );
         }
 
         if (usuario.getEmail() == null
-                || usuario.getEmail()
-                .trim()
-                .isEmpty()) {
+                || usuario.getEmail().trim().isEmpty()) {
 
             throw new IllegalArgumentException(
-                    "Email obrigatório"
+                    "Email obrigatório."
+            );
+        }
+
+        if (!emailValido(usuario.getEmail())) {
+
+            throw new IllegalArgumentException(
+                    "Informe um email válido."
             );
         }
 
         if (usuario.getSenha() == null
-                || usuario.getSenha()
-                .trim()
-                .isEmpty()) {
+                || usuario.getSenha().trim().isEmpty()) {
 
             throw new IllegalArgumentException(
-                    "Senha obrigatória"
+                    "Senha obrigatória."
             );
+        }
+
+        if (usuario.getSenha().length() < 6) {
+
+            throw new IllegalArgumentException(
+                    "A senha deve ter pelo menos 6 caracteres."
+            );
+        }
+
+        if (usuario.getPerguntaSeguranca() == null
+                || usuario.getPerguntaSeguranca().trim().isEmpty()) {
+
+            throw new IllegalArgumentException(
+                    "Pergunta de segurança obrigatória."
+            );
+        }
+
+        if (usuario.getRespostaSeguranca() == null
+                || usuario.getRespostaSeguranca().trim().isEmpty()) {
+
+            throw new IllegalArgumentException(
+                    "Resposta de segurança obrigatória."
+            );
+        }
+
+        if (usuario instanceof Cliente cliente) {
+
+            if (cliente.getCpf() == null
+                    || cliente.getCpf().trim().isEmpty()) {
+
+                throw new IllegalArgumentException(
+                        "CPF obrigatório."
+                );
+            }
+        }
+
+        if (usuario instanceof Prestador prestador) {
+
+            if (prestador.getCpfCnpj() == null
+                    || prestador.getCpfCnpj().trim().isEmpty()) {
+
+                throw new IllegalArgumentException(
+                        "CPF ou CNPJ obrigatório."
+                );
+            }
+
+            if (prestador.getCelular() == null
+                    || prestador.getCelular().trim().isEmpty()) {
+
+                throw new IllegalArgumentException(
+                        "Celular obrigatório."
+                );
+            }
+
+            if (prestador.getCategoria() == null
+                    || prestador.getCategoria().getNome() == null
+                    || prestador.getCategoria().getNome().trim().isEmpty()) {
+
+                throw new IllegalArgumentException(
+                        "Categoria obrigatória."
+                );
+            }
         }
     }
 
@@ -119,7 +190,6 @@ public class UsuarioServiceImp
                 usuarioDAO.buscarPorId(usuario.getId());
 
         if (usuarioBanco == null) {
-
             throw new IllegalArgumentException(
                     "Usuário não encontrado."
             );
@@ -132,13 +202,24 @@ public class UsuarioServiceImp
                 );
 
         if (!senhaCorreta) {
-
             throw new IllegalArgumentException(
                     "Senha atual incorreta."
             );
         }
 
+        usuario.setSenha(usuarioBanco.getSenha());
+
+        validarCampos(usuario);
+
         usuarioDAO.atualizar(usuario);
+    }
+    private boolean emailValido(String email) {
+
+        String regex =
+                "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+
+        return email != null
+                && email.matches(regex);
     }
 
     private void validarConfirmacaoSenha(

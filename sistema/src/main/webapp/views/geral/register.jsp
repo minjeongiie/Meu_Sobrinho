@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/home.jsp">MS Meu Sobrinho</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/views/geral/home.jsp">MS Meu Sobrinho</a>
     </div>
 </nav>
 
@@ -38,6 +38,12 @@
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <input name="email" type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">CPF</label>
+                            <input name="cpf"
+                                   class="form-control"
+                                   required>
                         </div>
                         <div class="mb-3 row">
                             <div class="col">

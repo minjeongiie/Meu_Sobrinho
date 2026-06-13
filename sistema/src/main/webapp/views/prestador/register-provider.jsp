@@ -12,7 +12,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/home.jsp">MS Meu Sobrinho</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/views/geral/home.jsp">MS Meu Sobrinho</a>
     </div>
 </nav>
 
@@ -45,6 +45,18 @@
                             <div class="col-md-6">
                                 <label class="form-label">Documento (CPF/CNPJ)</label>
                                 <input name="doc" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    Celular
+                                </label>
+
+                                <input
+                                        name="celular"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="(21) 99999-9999"
+                                        required>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Categoria</label>

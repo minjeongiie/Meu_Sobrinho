@@ -1,7 +1,7 @@
 package model.service.implementacoes;
 
-import model.dao.implementacoes.FakeAvaliacaoDAO;
-import model.dao.implementacoes.FakeContratacaoDAO;
+import model.dao.implementacoes.MySQLAvaliacaoDAO;
+import model.dao.implementacoes.MySQLContratacaoDAO;
 import model.dao.interfaces.AvaliacaoDAO;
 import model.dao.interfaces.ContratacaoDAO;
 import model.entity.Avaliacao;
@@ -17,8 +17,8 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
     private final ContratacaoDAO contratacaoDAO;
 
     public AvaliacaoServiceImp() {
-        this.avaliacaoDAO = new FakeAvaliacaoDAO();
-        this.contratacaoDAO = new FakeContratacaoDAO();
+        this.avaliacaoDAO = new MySQLAvaliacaoDAO();
+        this.contratacaoDAO = new MySQLContratacaoDAO();
     }
 
     @Override

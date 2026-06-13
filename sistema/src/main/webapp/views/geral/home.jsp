@@ -61,7 +61,6 @@
       <p class="text-muted">Perfis com portfólio, avaliações e contato — serviços acessíveis para pequenas demandas.</p>
       <div class="mt-3">
         <a href="${pageContext.request.contextPath}/buscar-prestadores" class="btn btn-primary me-2">Buscar profissionais</a>
-        <a href="${pageContext.request.contextPath}/views/prestador/register-provider.jsp" class="btn btn-outline-secondary">Quero oferecer serviços</a>
       </div>
     </div>
     <div class="col-lg-5">
