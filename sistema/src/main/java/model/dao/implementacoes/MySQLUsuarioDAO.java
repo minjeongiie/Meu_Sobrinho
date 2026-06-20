@@ -18,8 +18,8 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
 
         String sqlUsuario = """
                 INSERT INTO Usuario
-                (nomeCompleto, email, senha, perguntaSeguranca, respostaSeguranca, fotoPerfil)
-                VALUES (?, ?, ?, ?, ?, ?)
+                (nomeCompleto, email, senha, fotoPerfil)
+                VALUES (?, ?, ?, ?)
                 """;
 
         try (Connection conn = Conexao.conectar()) {
@@ -34,9 +34,7 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
                 stmt.setString(1, usuario.getNomeCompleto());
                 stmt.setString(2, usuario.getEmail());
                 stmt.setString(3, usuario.getSenha());
-                stmt.setString(4, usuario.getPerguntaSeguranca());
-                stmt.setString(5, usuario.getRespostaSeguranca());
-                stmt.setString(6, usuario.getFotoPerfil());
+                stmt.setString(4, usuario.getFotoPerfil());
 
                 stmt.executeUpdate();
 
@@ -106,8 +104,6 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
                 SET nomeCompleto = ?,
                     email = ?,
                     senha = ?,
-                    perguntaSeguranca = ?,
-                    respostaSeguranca = ?,
                     fotoPerfil = ?
                 WHERE id = ?
                 """;
@@ -120,10 +116,8 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
                 stmt.setString(1, usuario.getNomeCompleto());
                 stmt.setString(2, usuario.getEmail());
                 stmt.setString(3, usuario.getSenha());
-                stmt.setString(4, usuario.getPerguntaSeguranca());
-                stmt.setString(5, usuario.getRespostaSeguranca());
-                stmt.setString(6, usuario.getFotoPerfil());
-                stmt.setLong(7, usuario.getId());
+                stmt.setString(4, usuario.getFotoPerfil());
+                stmt.setLong(5, usuario.getId());
 
                 stmt.executeUpdate();
             }
@@ -408,8 +402,6 @@ public class MySQLUsuarioDAO implements UsuarioDAO {
         usuario.setNomeCompleto(rs.getString("nomeCompleto"));
         usuario.setEmail(rs.getString("email"));
         usuario.setSenha(rs.getString("senha"));
-        usuario.setPerguntaSeguranca(rs.getString("perguntaSeguranca"));
-        usuario.setRespostaSeguranca(rs.getString("respostaSeguranca"));
         usuario.setFotoPerfil(rs.getString("fotoPerfil"));
     }
 }

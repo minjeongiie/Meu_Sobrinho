@@ -6,8 +6,6 @@ CREATE TABLE Usuario (
                          nomeCompleto VARCHAR(200) NOT NULL,
                          email VARCHAR(150) NOT NULL UNIQUE,
                          senha VARCHAR(255) NOT NULL,
-                         perguntaSeguranca VARCHAR(150) NOT NULL,
-                         respostaSeguranca VARCHAR(150) NOT NULL,
                          fotoPerfil VARCHAR(255)
 ) ENGINE=InnoDB;
 

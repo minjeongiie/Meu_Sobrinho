@@ -6,8 +6,6 @@ public abstract class Usuario {
     private String nomeCompleto;
     private String email;
     private String senha;
-    private String perguntaSeguranca;
-    private String respostaSeguranca;
     private String fotoPerfil;
 
     public Usuario() {
@@ -43,22 +41,6 @@ public abstract class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getPerguntaSeguranca() {
-        return perguntaSeguranca;
-    }
-
-    public void setPerguntaSeguranca(String perguntaSeguranca) {
-        this.perguntaSeguranca = perguntaSeguranca;
-    }
-
-    public String getRespostaSeguranca() {
-        return respostaSeguranca;
-    }
-
-    public void setRespostaSeguranca(String respostaSeguranca) {
-        this.respostaSeguranca = respostaSeguranca;
     }
 
     public String getFotoPerfil() {

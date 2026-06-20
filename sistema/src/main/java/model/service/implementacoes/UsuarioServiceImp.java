@@ -94,22 +94,6 @@ public class UsuarioServiceImp
             );
         }
 
-        if (usuario.getPerguntaSeguranca() == null
-                || usuario.getPerguntaSeguranca().trim().isEmpty()) {
-
-            throw new IllegalArgumentException(
-                    "Pergunta de segurança obrigatória."
-            );
-        }
-
-        if (usuario.getRespostaSeguranca() == null
-                || usuario.getRespostaSeguranca().trim().isEmpty()) {
-
-            throw new IllegalArgumentException(
-                    "Resposta de segurança obrigatória."
-            );
-        }
-
         if (usuario instanceof Cliente cliente) {
 
             if (cliente.getCpf() == null

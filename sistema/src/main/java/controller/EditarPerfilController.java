@@ -83,8 +83,6 @@ public class EditarPerfilController extends HttpServlet {
                 cliente.setNomeCompleto(request.getParameter("name"));
                 cliente.setEmail(clienteLogado.getEmail());
                 cliente.setSenha(clienteLogado.getSenha());
-                cliente.setPerguntaSeguranca(clienteLogado.getPerguntaSeguranca());
-                cliente.setRespostaSeguranca(clienteLogado.getRespostaSeguranca());
                 cliente.setFotoPerfil(clienteLogado.getFotoPerfil());
 
                 cliente.setCpf(request.getParameter("cpf"));
@@ -99,8 +97,6 @@ public class EditarPerfilController extends HttpServlet {
                 prestador.setNomeCompleto(request.getParameter("name"));
                 prestador.setEmail(prestadorLogado.getEmail());
                 prestador.setSenha(prestadorLogado.getSenha());
-                prestador.setPerguntaSeguranca(prestadorLogado.getPerguntaSeguranca());
-                prestador.setRespostaSeguranca(prestadorLogado.getRespostaSeguranca());
                 prestador.setFotoPerfil(prestadorLogado.getFotoPerfil());
 
                 prestador.setCpfCnpj(request.getParameter("doc"));

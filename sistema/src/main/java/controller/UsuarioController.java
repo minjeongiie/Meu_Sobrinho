@@ -98,14 +98,6 @@ public class UsuarioController extends HttpServlet {
             usuario.setEmail(request.getParameter("email"));
             usuario.setSenha(senha);
 
-            usuario.setPerguntaSeguranca(
-                    request.getParameter("securityQuestion")
-            );
-
-            usuario.setRespostaSeguranca(
-                    request.getParameter("securityAnswer")
-            );
-
             usuarioService.cadastrar(usuario, confirmarSenha);
 
             response.sendRedirect(
