@@ -61,6 +61,9 @@
     </dependencies>
 
     <build>
+
+        <finalName>meu-sobrinho</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
