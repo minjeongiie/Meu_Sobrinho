@@ -2,6 +2,7 @@ package model.service.implementacoes;
 
 import model.dao.implementacoes.FakeSolicitacaoServicoDAO;
 import model.dao.interfaces.SolicitacaoServicoDAO;
+import model.entity.Categoria;
 import model.entity.SolicitacaoServico;
 import model.entity.StatusSolicitacaoServico;
 import model.service.interfaces.SolicitacaoServicoService;
@@ -24,7 +25,7 @@ public class SolicitacaoServicoServiceImp
             String titulo,
             String descricao,
             Double valorEstimado,
-            Long categoriaId,
+            Categoria categoria,
             LocalDate dataDesejada
     ) {
 
@@ -46,7 +47,7 @@ public class SolicitacaoServicoServiceImp
             );
         }
 
-        if (categoriaId == null) {
+        if (categoria == null || categoria.getId() == null) {
             throw new IllegalArgumentException(
                     "Categoria obrigatória."
             );
@@ -65,7 +66,7 @@ public class SolicitacaoServicoServiceImp
         solicitacao.setTitulo(titulo);
         solicitacao.setDescricao(descricao);
         solicitacao.setValorEstimado(valorEstimado);
-        solicitacao.setCategoriaId(categoriaId);
+        solicitacao.setCategoria(categoria);
         solicitacao.setDataDesejada(dataDesejada);
         solicitacao.setStatus(StatusSolicitacaoServico.ABERTA);
 
@@ -84,7 +85,9 @@ public class SolicitacaoServicoServiceImp
             );
         }
 
-        solicitacao.setStatus(StatusSolicitacaoServico.FECHADA);
+        solicitacao.setStatus(
+                StatusSolicitacaoServico.FECHADA
+        );
 
         solicitacaoDAO.atualizar(solicitacao);
     }

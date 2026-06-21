@@ -3,9 +3,12 @@ package controller;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import model.entity.Categoria;
 import model.entity.Cliente;
 import model.entity.Usuario;
+import model.service.implementacoes.CategoriaServiceImp;
 import model.service.implementacoes.SolicitacaoServicoServiceImp;
+import model.service.interfaces.CategoriaService;
 import model.service.interfaces.SolicitacaoServicoService;
 
 import java.io.IOException;
@@ -15,10 +18,12 @@ import java.time.LocalDate;
 public class PublicarSolicitacaoController extends HttpServlet {
 
     private SolicitacaoServicoService solicitacaoService;
+    private CategoriaService categoriaService;
 
     @Override
     public void init() {
         solicitacaoService = new SolicitacaoServicoServiceImp();
+        categoriaService = new CategoriaServiceImp();
     }
 
     @Override
@@ -61,19 +66,34 @@ public class PublicarSolicitacaoController extends HttpServlet {
 
             Double valorEstimado = null;
 
-            if (valorParam != null && !valorParam.trim().isEmpty()) {
-                valorEstimado = Double.parseDouble(valorParam);
+            if (valorParam != null &&
+                    !valorParam.trim().isEmpty()) {
+
+                valorEstimado =
+                        Double.parseDouble(valorParam);
             }
 
-            Long categoriaId = Long.parseLong(categoriaParam);
-            LocalDate dataDesejada = LocalDate.parse(dataParam);
+            Long categoriaId =
+                    Long.parseLong(categoriaParam);
+
+            Categoria categoria =
+                    categoriaService.buscarPorId(categoriaId);
+
+            if (categoria == null) {
+                throw new IllegalArgumentException(
+                        "Categoria inválida."
+                );
+            }
+
+            LocalDate dataDesejada =
+                    LocalDate.parse(dataParam);
 
             solicitacaoService.publicarSolicitacao(
                     usuario.getId(),
                     titulo,
                     descricao,
                     valorEstimado,
-                    categoriaId,
+                    categoria,
                     dataDesejada
             );
 

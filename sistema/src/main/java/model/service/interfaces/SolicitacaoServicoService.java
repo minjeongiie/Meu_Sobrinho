@@ -1,5 +1,6 @@
 package model.service.interfaces;
 
+import model.entity.Categoria;
 import model.entity.SolicitacaoServico;
 
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ public interface SolicitacaoServicoService {
             String titulo,
             String descricao,
             Double valorEstimado,
-            Long categoriaId,
+            Categoria categoria,
             LocalDate dataDesejada
     );
 

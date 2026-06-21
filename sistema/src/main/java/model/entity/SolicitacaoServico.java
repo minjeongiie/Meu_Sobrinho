@@ -9,7 +9,7 @@ public class SolicitacaoServico {
     private String titulo;
     private String descricao;
     private Double valorEstimado;
-    private Long categoriaId;
+    private Categoria categoria;
     private LocalDate dataDesejada;
     private StatusSolicitacaoServico status;
 
@@ -57,12 +57,12 @@ public class SolicitacaoServico {
         this.valorEstimado = valorEstimado;
     }
 
-    public Long getCategoriaId() {
-        return categoriaId;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setCategoriaId(Long categoriaId) {
-        this.categoriaId = categoriaId;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public LocalDate getDataDesejada() {

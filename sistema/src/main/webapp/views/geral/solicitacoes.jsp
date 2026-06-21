@@ -37,7 +37,7 @@
 
   <p><strong>Descrição:</strong> <%= solicitacao.getDescricao() %></p>
   <p><strong>Valor estimado:</strong> R$ <%= solicitacao.getValorEstimado() %></p>
-  <p><strong>Categoria ID:</strong> <%= solicitacao.getCategoriaId() %></p>
+  <p><strong>Categoria ID:</strong> <%= solicitacao.getCategoria().getNome()%></p>
   <p><strong>Data desejada:</strong> <%= solicitacao.getDataDesejada() %></p>
   <p><strong>Status:</strong> <%= solicitacao.getStatus() %></p>
 
