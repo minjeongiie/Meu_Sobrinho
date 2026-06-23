@@ -80,7 +80,6 @@
                                 <input name="password2" type="password" class="form-control" required>
                             </div>
                         </div>
-
                         <div class="mb-3">
                             <label class="form-label">Descrição curta</label>
                             <textarea name="bio" class="form-control" rows="3"></textarea>
