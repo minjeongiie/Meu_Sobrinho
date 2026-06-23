@@ -2,6 +2,8 @@ package model.service.implementacoes;
 
 import model.dao.implementacoes.FakePropostaServicoDAO;
 import model.dao.implementacoes.FakeSolicitacaoServicoDAO;
+import model.dao.implementacoes.MySQLPropostaServicoDAO;
+import model.dao.implementacoes.MySQLSolicitacaoServicoDAO;
 import model.dao.interfaces.PropostaServicoDAO;
 import model.dao.interfaces.SolicitacaoServicoDAO;
 import model.entity.PropostaServico;
@@ -20,8 +22,8 @@ public class PropostaServicoServiceImp
     private final SolicitacaoServicoDAO solicitacaoDAO;
 
     public PropostaServicoServiceImp() {
-        this.propostaDAO = new FakePropostaServicoDAO();
-        this.solicitacaoDAO = new FakeSolicitacaoServicoDAO();
+        this.propostaDAO = new MySQLPropostaServicoDAO();
+        this.solicitacaoDAO = new MySQLSolicitacaoServicoDAO();
     }
 
     @Override
