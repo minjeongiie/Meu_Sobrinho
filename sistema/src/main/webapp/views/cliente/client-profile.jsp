@@ -30,6 +30,7 @@
         <div class="collapse navbar-collapse" id="navMain">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
+
                     <form action="${pageContext.request.contextPath}/logout" method="get" style="display:inline">
                         <button class="btn btn-outline-secondary">Sair</button>
                     </form>
@@ -75,6 +76,16 @@
                 </div>
             </div>
 
+            <div class="card mb-3">
+                <div class="card-body">
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/publicar-solicitacao.jsp">Fazer solicitação</a></li>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/minhas-solicitacoes.jsp">ver solicitações</a></li>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-body">
                     <h6>Dados do Cliente</h6>
