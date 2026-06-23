@@ -71,6 +71,8 @@
                     <p class="small-muted">Gerencie seu perfil profissional.</p>
                 </div>
             </div>
+            <a href="${pageContext.request.contextPath}/servicos-disponiveis"
+               class="btn btn-primary mt-3">Ver Serviços Disponíveis</a>
 
             <div class="card">
                 <div class="card-body">

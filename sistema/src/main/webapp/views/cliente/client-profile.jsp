@@ -95,6 +95,14 @@
                        class="btn btn-primary mt-3">
                         Editar Perfil
                     </a>
+                    <!-- Botão para ver solicitações -->
+                    <a href="${pageContext.request.contextPath}/views/cliente/minhas-solicitacoes.jsp"
+                       class="btn btn-primary">Minhas Solicitações</a>
+
+                    <!-- Botão para publicar nova solicitação -->
+                    <a href="${pageContext.request.contextPath}/views/cliente/publicar-solicitacao.jsp"
+                       class="btn btn-success">Publicar Solicitação</a>
+
                 </div>
             </div>
 
