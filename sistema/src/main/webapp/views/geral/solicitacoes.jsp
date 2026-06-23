@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+﻿<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="model.entity.SolicitacaoServico" %>
 <%@ page import="model.entity.Prestador" %>
 <%@ page import="java.util.List" %>
@@ -8,68 +8,110 @@
 <head>
   <meta charset="UTF-8">
   <title>Solicitações de Serviço</title>
+  <!-- Bootstrap + CSS custom -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 </head>
 <body>
 
-<h1>Solicitações Abertas</h1>
+<!-- Navbar padrão -->
+<nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand header-brand" href="${pageContext.request.contextPath}/views/geral/home.jsp">
+      <div class="brand-badge">
+        <img src="${pageContext.request.contextPath}/assets/img/icon.png" alt="Meu Sobrinho">
+      </div>
+      <div>
+        <div class="fw-bold">Meu Sobrinho</div>
+        <small class="small-muted">Conectando iniciantes de TI</small>
+      </div>
+    </a>
 
-<p style="color:red;">${error}</p>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<%
-  List<SolicitacaoServico> solicitacoes =
-          (List<SolicitacaoServico>) request.getAttribute("solicitacoes");
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/buscar-prestadores">Buscar</a></li>
+        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/views/geral/home.jsp#about">Sobre</a></li>
+        <c:choose>
+          <c:when test="${not empty sessionScope.usuarioLogado}">
+            <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/perfil">Meu Perfil</a></li>
+            <li class="nav-item">
+              <form action="${pageContext.request.contextPath}/logout" method="get" style="display:inline">
+                <button class="btn btn-outline-secondary">Sair</button>
+              </form>
+            </li>
+          </c:when>
+          <c:otherwise>
+            <li class="nav-item"><a class="btn btn-outline-primary ms-lg-3" href="${pageContext.request.contextPath}/views/geral/login.jsp">Entrar</a></li>
+            <li class="nav-item"><a class="btn btn-primary ms-2" href="${pageContext.request.contextPath}/views/geral/register.jsp">Cadastrar</a></li>
+          </c:otherwise>
+        </c:choose>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-  Object usuarioLogado =
-          session.getAttribute("usuarioLogado");
-%>
+<!-- Conteúdo principal -->
+<main class="container my-4">
+  <h1>Solicitações Abertas</h1>
+  <p class="text-danger">${error}</p>
 
-<% if (solicitacoes == null || solicitacoes.isEmpty()) { %>
+  <%
+    List<SolicitacaoServico> solicitacoes =
+            (List<SolicitacaoServico>) request.getAttribute("solicitacoes");
+    Object usuarioLogado =
+            session.getAttribute("usuarioLogado");
+  %>
 
-<p>Nenhuma solicitação aberta no momento.</p>
+  <% if (solicitacoes == null || solicitacoes.isEmpty()) { %>
+  <div class="empty-state">Nenhuma solicitação aberta no momento.</div>
+  <% } else { %>
+  <% for (SolicitacaoServico solicitacao : solicitacoes) { %>
+  <div class="card-shadow mb-3 p-3">
+    <h3><%= solicitacao.getTitulo() %></h3>
+    <p><strong>Descrição:</strong> <%= solicitacao.getDescricao() %></p>
+    <p><strong>Valor estimado:</strong> R$ <%= solicitacao.getValorEstimado() %></p>
+    <p><strong>Categoria:</strong> <%= solicitacao.getCategoria().getNome()%></p>
+    <p><strong>Data desejada:</strong> <%= solicitacao.getDataDesejada() %></p>
+    <p><strong>Status:</strong> <%= solicitacao.getStatus() %></p>
 
-<% } else { %>
+    <% if (usuarioLogado instanceof Prestador) { %>
+    <form action="${pageContext.request.contextPath}/enviar-proposta" method="post" class="mt-3">
+      <input type="hidden" name="solicitacaoId" value="<%= solicitacao.getId() %>">
 
-<% for (SolicitacaoServico solicitacao : solicitacoes) { %>
+      <div class="mb-3">
+        <label class="form-label">Valor proposto:</label>
+        <input type="number" step="0.01" name="valorProposto" class="form-control">
+      </div>
 
-<div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+      <div class="mb-3">
+        <label class="form-label">Descrição da proposta:</label>
+        <textarea name="descricao" class="form-control"></textarea>
+      </div>
 
-  <h3><%= solicitacao.getTitulo() %></h3>
+      <div class="mb-3">
+        <label class="form-label">Prazo de conclusão:</label>
+        <input type="date" name="prazoConclusao" class="form-control">
+      </div>
 
-  <p><strong>Descrição:</strong> <%= solicitacao.getDescricao() %></p>
-  <p><strong>Valor estimado:</strong> R$ <%= solicitacao.getValorEstimado() %></p>
-  <p><strong>Categoria ID:</strong> <%= solicitacao.getCategoria().getNome()%></p>
-  <p><strong>Data desejada:</strong> <%= solicitacao.getDataDesejada() %></p>
-  <p><strong>Status:</strong> <%= solicitacao.getStatus() %></p>
-
-  <% if (usuarioLogado instanceof Prestador) { %>
-
-  <form action="${pageContext.request.contextPath}/enviar-proposta" method="post">
-
-    <input type="hidden" name="solicitacaoId"
-           value="<%= solicitacao.getId() %>">
-
-    <label>Valor proposto:</label><br>
-    <input type="number" step="0.01" name="valorProposto"><br><br>
-
-    <label>Descrição da proposta:</label><br>
-    <textarea name="descricao"></textarea><br><br>
-
-    <label>Prazo de conclusão:</label><br>
-    <input type="date" name="prazoConclusao"><br><br>
-
-    <button type="submit">Enviar proposta</button>
-  </form>
-
+      <button type="submit" class="btn btn-primary">Enviar proposta</button>
+    </form>
+    <% } %>
+  </div>
+  <% } %>
   <% } %>
 
-</div>
+  <a href="${pageContext.request.contextPath}/perfil" class="btn btn-outline-secondary mt-3">Voltar ao perfil</a>
+</main>
 
-<% } %>
+<!-- Footer -->
+<footer>
+  <div class="footer-small">© 2026 Meu Sobrinho - Todos os direitos reservados</div>
+</footer>
 
-<% } %>
-
-<br>
-<a href="${pageContext.request.contextPath}/perfil">Voltar ao perfil</a>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

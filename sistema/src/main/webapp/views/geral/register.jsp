@@ -55,22 +55,6 @@
                                 <input name="password2" type="password" class="form-control" required>
                             </div>
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Pergunta de segurança</label>
-                            <select name="securityQuestion" class="form-select" required>
-                                <option value="">Selecione uma pergunta</option>
-                                <option value="nome_mae">Qual o nome da sua mãe?</option>
-                                <option value="cidade_natal">Qual sua cidade natal?</option>
-                                <option value="primeiro_pet">Qual o nome do seu primeiro pet?</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Resposta</label>
-                            <input name="securityAnswer" type="text" class="form-control" required>
-                        </div>
-
                         <button class="btn btn-primary" type="submit">Criar conta</button>
                     </form>
                 </div>
