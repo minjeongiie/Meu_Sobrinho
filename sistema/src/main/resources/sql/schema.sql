@@ -2,10 +2,12 @@ CREATE DATABASE IF NOT EXISTS meu_sobrinho;
 USE meu_sobrinho;
 
 CREATE TABLE Usuario (
-                         id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                         id INT AUTO_INCREMENT PRIMARY KEY,
                          nomeCompleto VARCHAR(200) NOT NULL,
                          email VARCHAR(150) NOT NULL UNIQUE,
-                         senha VARCHAR(255) NOT NULL,
+                         senha VARCHAR(100) NOT NULL,
+                         perguntaSeguranca VARCHAR(150),
+                         respostaSeguranca VARCHAR(150),
                          fotoPerfil VARCHAR(255)
 ) ENGINE=InnoDB;
 
@@ -35,23 +37,17 @@ CREATE TABLE Prestador (
 ) ENGINE=InnoDB;
 
 CREATE TABLE Contratacao (
-                             id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                             clienteId BIGINT NOT NULL,
-                             prestadorId BIGINT NOT NULL,
-                             descricao TEXT NOT NULL,
-                             preco DECIMAL(10,2),
-                             dataSolicitada DATE,
-                             status ENUM(
-        'PENDENTE',
-        'ACEITA',
-        'RECUSADA',
-        'CONTRAPROPOSTA',
-        'CONCLUIDA'
-    ) NOT NULL DEFAULT 'PENDENTE',
-                             valorContraproposta DECIMAL(10,2),
-                             mensagemContraproposta TEXT,
-                             FOREIGN KEY (clienteId) REFERENCES Cliente(id),
-                             FOREIGN KEY (prestadorId) REFERENCES Prestador(id)
+                             id INT AUTO_INCREMENT PRIMARY KEY,
+                             dataContratacao DATE NOT NULL,
+                             status ENUM('PENDENTE','ACEITA','CONCLUIDA','RECUSADA','CONTRAPROPOSTA') NOT NULL,
+                             prestadorId INT NOT NULL,
+                             clienteId INT NOT NULL,
+                             mensagemContraproposta VARCHAR(255),
+                             preco DOUBLE,
+                             descricao VARCHAR(255),
+                             valorContraproposta DOUBLE,
+                             FOREIGN KEY (prestadorId) REFERENCES Prestador(id),
+                             FOREIGN KEY (clienteId) REFERENCES Cliente(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Avaliacao (
@@ -66,4 +62,12 @@ CREATE TABLE Avaliacao (
                            FOREIGN KEY (clienteId) REFERENCES Cliente(id),
                            FOREIGN KEY (prestadorId) REFERENCES Prestador(id),
                            CHECK (nota >= 1 AND nota <= 5)
+) ENGINE=InnoDB;
+-- Tabela Servico (se ainda não existir)
+CREATE TABLE Servico (
+                         id INT AUTO_INCREMENT PRIMARY KEY,
+                         descricao VARCHAR(255),
+                         valor DOUBLE,
+                         prestadorId INT,
+                         FOREIGN KEY (prestadorId) REFERENCES Prestador(id)
 ) ENGINE=InnoDB;
