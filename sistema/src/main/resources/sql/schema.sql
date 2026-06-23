@@ -71,3 +71,59 @@ CREATE TABLE Servico (
                          prestadorId INT,
                          FOREIGN KEY (prestadorId) REFERENCES Prestador(id)
 ) ENGINE=InnoDB;
+
+-- =========================
+-- Tabela de Status da Solicitação
+-- =========================
+CREATE TABLE StatusSolicitacaoServico (
+                                          id INT AUTO_INCREMENT PRIMARY KEY,
+                                          nome VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Valores iniciais
+INSERT INTO StatusSolicitacaoServico (nome) VALUES
+                                                ('ABERTA'),
+                                                ('FECHADA');
+
+-- =========================
+-- Tabela de Status da Proposta
+-- =========================
+CREATE TABLE StatusPropostaServico (
+                                       id INT AUTO_INCREMENT PRIMARY KEY,
+                                       nome VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Valores iniciais
+INSERT INTO StatusPropostaServico (nome) VALUES
+                                             ('PENDENTE'),
+                                             ('ACEITA'),
+                                             ('RECUSADA');
+
+-- =========================
+-- Tabela principal: Solicitação de Serviço
+-- =========================
+CREATE TABLE SolicitacaoServico (
+                                    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                    clienteId BIGINT NOT NULL,
+                                    titulo VARCHAR(255) NOT NULL,
+                                    descricao TEXT,
+                                    valorEstimado DOUBLE,
+                                    categoriaId BIGINT,
+                                    dataDesejada DATE,
+                                    statusId INT NOT NULL,
+                                    FOREIGN KEY (statusId) REFERENCES StatusSolicitacaoServico(id)
+);
+
+-- =========================
+-- Tabela principal: Proposta de Serviço
+-- =========================
+CREATE TABLE PropostaServico (
+                                 id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                 solicitacaoId BIGINT NOT NULL,
+                                 prestadorId BIGINT NOT NULL,
+                                 valorProposto DOUBLE,
+                                 descricao TEXT,
+                                 prazoConclusao DATE,
+                                 statusId INT NOT NULL,
+                                 FOREIGN KEY (statusId) REFERENCES StatusPropostaServico(id)
+);
