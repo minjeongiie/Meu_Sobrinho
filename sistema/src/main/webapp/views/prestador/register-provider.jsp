@@ -85,22 +85,6 @@
                             <label class="form-label">Descrição curta</label>
                             <textarea name="bio" class="form-control" rows="3"></textarea>
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Pergunta de segurança</label>
-                            <select name="securityQuestion" class="form-select" required>
-                                <option value="">Selecione uma pergunta</option>
-                                <option value="nome_mae">Qual o nome da sua mãe?</option>
-                                <option value="cidade_natal">Qual sua cidade natal?</option>
-                                <option value="primeiro_pet">Qual o nome do seu primeiro pet?</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Resposta</label>
-                            <input name="securityAnswer" type="text" class="form-control" required>
-                        </div>
-
                         <button class="btn btn-primary" type="submit">Criar perfil</button>
                     </form>
                 </div>
